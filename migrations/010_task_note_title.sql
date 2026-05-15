@@ -1,0 +1,2 @@
+ALTER TABLE task_notes
+  ADD COLUMN IF NOT EXISTS title TEXT NULL AFTER user_id;
