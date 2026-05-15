@@ -1,0 +1,357 @@
+/* study.css — Study page layout (CSP-safe, no inline) */
+
+.st-head{ margin: 10px 0 14px; }
+.st-crumb{ display:flex; align-items:center; gap: 10px; font-weight: 900; color: rgba(0,0,0,.58); }
+.st-crumb__link{ color: rgba(0,0,0,.62); text-decoration:none; }
+.st-crumb__link:hover{ text-decoration: underline; }
+.st-crumb__sep{ opacity:.55; }
+.st-title{ margin-top: 8px; }
+
+.st-top{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.st-card{ padding: 16px; }
+.st-kicker{ font-weight: 950; color: rgba(0,0,0,.78); font-size: 14px; line-height: 1.2; }
+.st-kicker__sub{ font-weight: 900; color: rgba(0,0,0,.52); font-size: 12px; }
+.st-sub{ margin-top: 10px; color: rgba(0,0,0,.58); font-weight: 850; font-size: 13px; }
+
+.st-card__main{ min-width: 0; }
+.st-card__aside{ display:flex; align-items:center; justify-content:flex-end; }
+
+.st-card--today{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 14px;
+}
+
+.st-donut{ position:relative; width: 110px; height: 110px; }
+.st-donut canvas{ width: 110px; height: 110px; display:block; }
+.st-donut__txt{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.st-donut__big{ font-weight: 1000; font-size: 18px; color: rgba(0,0,0,.78); }
+.st-donut__hint{ font-weight: 900; font-size: 12px; color: rgba(0,0,0,.52); }
+
+.st-week__spark{ margin-top: 10px; }
+#weeklySpark{ width: 100%; height: 86px; }
+
+.st-alert{ margin-top: 10px; }
+.st-alert__row{
+  display:flex; gap: 12px; align-items:flex-start;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.10);
+  background: rgba(255, 168, 0, .18);
+}
+.st-alert__ic{ width: 26px; height: 26px; display:grid; place-items:center; border-radius: 10px; background: rgba(255,255,255,.60); }
+.st-alert__ic .icon{ width: 18px; height: 18px; }
+.st-alert__title{ font-weight: 1000; color: rgba(0,0,0,.78); }
+.st-alert__msg{ margin-top: 4px; font-weight: 850; color: rgba(0,0,0,.62); font-size: 13px; }
+
+.st-prog__row{ display:flex; align-items:center; justify-content:space-between; margin-top: 12px; }
+.st-prog__name{ font-weight: 950; color: rgba(0,0,0,.72); }
+.st-prog__pct{ font-weight: 1000; color: rgba(0,0,0,.78); }
+
+.st-bar{ margin-top: 10px; position:relative; height: 10px; border-radius: 999px; overflow:hidden; }
+.st-bar__track{ position:absolute; inset:0; background: rgba(0,0,0,.08); }
+.st-bar__fill{ position:absolute; inset:0; width: 0%; background: rgba(47,111,85,.62); border-radius: 999px; }
+
+/* Progress classes p0..p100 */
+.st-bar.p0 .st-bar__fill{ width:0%; }
+.st-bar.p10 .st-bar__fill{ width:10%; }
+.st-bar.p20 .st-bar__fill{ width:20%; }
+.st-bar.p30 .st-bar__fill{ width:30%; }
+.st-bar.p40 .st-bar__fill{ width:40%; }
+.st-bar.p50 .st-bar__fill{ width:50%; }
+.st-bar.p60 .st-bar__fill{ width:60%; }
+.st-bar.p70 .st-bar__fill{ width:70%; }
+.st-bar.p80 .st-bar__fill{ width:80%; }
+.st-bar.p90 .st-bar__fill{ width:90%; }
+.st-bar.p100 .st-bar__fill{ width:100%; }
+
+/* fine-grained % with CSS var fallback handled in JS via class pXX */
+
+.st-grid{
+  display:grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.st-grid > .st-panel,
+.st-grid > .st-ledger{
+  min-width: 0;
+}
+
+.st-panel{
+  padding: 0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+.st-panel .card__header{ padding: 14px 16px 10px; }
+.st-panel__body{
+  padding: 14px 16px 16px;
+  flex:1;
+}
+
+.st-ledger{
+  grid-column: 1 / -1;
+}
+
+.st-course{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.62);
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.72);
+  margin-bottom: 10px;
+}
+.st-course__ic{ width: 42px; height: 42px; border-radius: 14px; display:grid; place-items:center; background: rgba(47,111,85,.14); color: rgba(47,111,85,.92); font-weight: 1000; }
+.st-course__main{ min-width:0; flex:1; }
+.st-course__name{ font-weight: 1000; color: rgba(0,0,0,.78); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.st-course__sub{ margin-top: 3px; font-weight: 900; color: rgba(0,0,0,.56); font-size: 12px; }
+.st-course__pct{ font-weight: 1000; color: rgba(0,0,0,.72); }
+.st-course__bar{ margin-top: 6px; height: 8px; border-radius: 999px; overflow:hidden; background: rgba(0,0,0,.08); }
+.st-course__bar > span{ display:block; height:100%; width:0%; background: rgba(47,111,85,.62); }
+
+.st-field{ margin-bottom: 14px; }
+.st-field__row{ display:flex; gap: 10px; align-items:center; }
+.st-field__row > *{ flex:1; min-width:0; }
+
+/* Quick Add Study Goal: keep the form clean + full-width (fix label/input wrap issues) */
+#stAddForm .input{ width:100%; display:block; }
+#stAddForm .select{ width:100%; display:block; }
+#stAddForm .date-wrap{ width:100%; }
+#stAddForm .input--date::-webkit-calendar-picker-indicator{ opacity:0; cursor:pointer; }
+
+.st-cta{ margin-top: 12px; }
+#stAddHint{ margin-top: 10px; }
+.st-ghost{ margin-top: 12px; }
+
+.st-ledger{ padding: 0; overflow:hidden; }
+.st-ledger .card__header{ padding: 14px 16px 10px; }
+.st-ledger__body{ padding: 12px 16px 16px; }
+
+.st-tabs{ display:flex; align-items:center; gap: 8px; }
+
+.st-ledger__head{ display:flex; align-items:center; justify-content:space-between; gap: 12px; margin-bottom: 10px; }
+.st-ledger__title{ font-weight: 1000; color: rgba(0,0,0,.78); }
+
+.st-tablewrap{ background: rgba(255,255,255,.50); border: 1px solid rgba(0,0,0,.08); border-radius: 16px; overflow:hidden; }
+
+.st-table{ width:100%; border-collapse: collapse; font-weight: 900; }
+.st-table thead th{ text-align:left; padding: 12px 12px; font-size: 12px; color: rgba(0,0,0,.62); background: rgba(255,255,255,.72); border-bottom: 1px solid rgba(0,0,0,.06); }
+.st-table tbody td{ padding: 12px 12px; border-bottom: 1px solid rgba(0,0,0,.06); color: rgba(0,0,0,.76); font-weight: 900; font-size: 13px; vertical-align: middle; }
+.st-table tbody tr:hover{ background: rgba(255,255,255,.72); }
+
+.st-ic{ width: 44px; }
+.st-act{ width: 42px; text-align:right; }
+
+.st-rowtitle{ max-width: 420px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.st-actionbtn{
+  width: 32px; height: 32px;
+  border: 1px solid rgba(0,0,0,.10);
+  background: rgba(255,255,255,.70);
+  border-radius: 12px;
+  cursor:pointer;
+  color: rgba(0,0,0,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.st-actionbtn .icon{ width: 16px; height: 16px; }
+.st-actionbtn:hover{ background: rgba(255,255,255,.90); }
+
+.st-empty{ padding: 18px; text-align:center; }
+.st-empty__title{ font-weight: 1000; color: rgba(0,0,0,.78); }
+.st-empty__msg{ margin-top: 6px; font-weight: 850; color: rgba(0,0,0,.56); font-size: 13px; }
+
+.st-timeline{ margin-top: 12px; padding: 10px 4px 0; }
+.st-timeline__title{ font-weight: 1000; color: rgba(0,0,0,.72); margin: 4px 6px 10px; }
+.st-timeline__canvas{ width: 100%; height: 160px; display:block; }
+
+/* Responsive */
+@media (max-width: 1100px){
+  .st-top{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .st-grid{ grid-template-columns: 1fr; }
+  .st-ledger{ grid-column: auto; }
+}
+
+@media (max-width: 560px){
+  .st-top{ grid-template-columns: 1fr; }
+  .st-ledger__head{ flex-direction: column; align-items: stretch; }
+  .st-tabs{ flex-wrap: wrap; justify-content: flex-start; }
+  .st-table thead{ display:none; }
+  .st-table, .st-table tbody, .st-table tr, .st-table td{ display:block; width:100%; }
+  .st-table tbody tr{ padding: 10px 12px; }
+  .st-table tbody td{ border:0; padding: 6px 0; }
+  .st-rowtitle{ max-width: unset; white-space: normal; }
+  .st-act{ text-align:left; }
+}
+
+/* Dark mode — Study icons and alerts */
+html[data-theme="dark"] .st-alert__row,
+html[data-theme="dark"] .st-card,
+html[data-theme="dark"] .st-panel,
+html[data-theme="dark"] .st-ledger{
+  background: rgba(18,25,29,.80);
+  border-color: rgba(255,255,255,.08);
+  color: rgba(239,246,243,.94);
+}
+html[data-theme="dark"] .st-kicker,
+html[data-theme="dark"] .st-title,
+html[data-theme="dark"] .st-donut__big,
+html[data-theme="dark"] .st-alert__title,
+html[data-theme="dark"] .st-prog__name,
+html[data-theme="dark"] .st-prog__pct{
+  color: rgba(239,246,243,.92);
+}
+html[data-theme="dark"] .st-kicker__sub,
+html[data-theme="dark"] .st-sub,
+html[data-theme="dark"] .st-donut__hint,
+html[data-theme="dark"] .st-alert__msg{
+  color: rgba(213,223,219,.70);
+}
+html[data-theme="dark"] .st-alert__ic{
+  width: 24px;
+  height: 24px;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+html[data-theme="dark"] .st-alert__ic .icon{
+  color: rgba(196,214,207,.88);
+}
+html[data-theme="dark"] .st-course{
+  background: rgba(18,27,32,.96);
+  border-color: rgba(255,255,255,.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+}
+html[data-theme="dark"] .st-course__ic{
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: rgba(196,214,207,.88);
+}
+html[data-theme="dark"] .st-course__name,
+html[data-theme="dark"] .st-course__pct{
+  color: rgba(239,246,243,.92);
+}
+html[data-theme="dark"] .st-course__sub{
+  color: rgba(213,223,219,.70);
+}
+html[data-theme="dark"] .st-course__bar{
+  background: rgba(255,255,255,.08);
+}
+html[data-theme="dark"] .st-course__bar > span{
+  background: rgba(83,157,123,.72);
+}
+
+
+/* Dark mode — study ledger/table surfaces */
+html[data-theme="dark"] .st-ledger__title,
+html[data-theme="dark"] .st-timeline__title,
+html[data-theme="dark"] .st-empty__title{
+  color: rgba(239,246,243,.92);
+}
+html[data-theme="dark"] .st-empty__msg{
+  color: rgba(213,223,219,.70);
+}
+html[data-theme="dark"] .st-tablewrap{
+  background: var(--ln-dark-surface-2);
+  border-color: var(--ln-dark-border-soft);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+  scrollbar-color: rgba(161,184,174,.30) rgba(9,14,17,.88);
+}
+html[data-theme="dark"] .st-tablewrap::-webkit-scrollbar{
+  width: 12px;
+  height: 12px;
+}
+html[data-theme="dark"] .st-tablewrap::-webkit-scrollbar-track{
+  background: rgba(9,14,17,.92);
+}
+html[data-theme="dark"] .st-tablewrap::-webkit-scrollbar-thumb{
+  background: rgba(161,184,174,.24);
+  border-radius: 999px;
+  border: 2px solid rgba(9,14,17,.92);
+}
+html[data-theme="dark"] .st-tablewrap::-webkit-scrollbar-thumb:hover{
+  background: rgba(184,205,196,.34);
+}
+html[data-theme="dark"] .st-table thead th{
+  background: var(--ln-dark-surface-3);
+  color: rgba(232,240,237,.78);
+  border-bottom-color: rgba(255,255,255,.08);
+}
+html[data-theme="dark"] .st-table tbody td{
+  color: rgba(230,238,235,.84);
+  border-bottom-color: rgba(255,255,255,.06);
+}
+html[data-theme="dark"] .st-table tbody tr:hover{
+  background: rgba(255,255,255,.03);
+}
+html[data-theme="dark"] .st-actionbtn{
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.08);
+  color: rgba(213,223,219,.74);
+}
+html[data-theme="dark"] .st-actionbtn:hover,
+html[data-theme="dark"] .st-actionbtn:focus-visible{
+  background: rgba(255,255,255,.08);
+  color: rgba(239,246,243,.92);
+}
+
+/* ===== Extra mobile study polish ===== */
+@media (max-width: 560px){
+  .st-card,
+  .st-panel,
+  .st-ledger{
+    border-radius:20px;
+  }
+
+  .st-card--today{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .st-card__aside{
+    width:100%;
+    justify-content:center;
+  }
+
+  .st-panel .card__header,
+  .st-ledger .card__header{
+    padding: 14px 14px 10px;
+  }
+
+  .st-panel__body,
+  .st-ledger__body{
+    padding-inline:14px;
+  }
+
+  .st-field__row{
+    flex-direction:column;
+  }
+
+  .st-tabs{
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding-bottom:4px;
+  }
+
+  .st-tabs .tab{
+    flex:0 0 auto;
+    white-space:nowrap;
+  }
+}

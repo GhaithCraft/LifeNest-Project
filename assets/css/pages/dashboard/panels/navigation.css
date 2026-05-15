@@ -1,0 +1,118 @@
+/* dashboard/panels/navigation.css */
+
+.panel--navigation .nav-panel{
+  padding: 0 18px 18px;
+}
+
+.panel--navigation .nav-panel__lead{
+  margin: 0 0 14px;
+  font-size: .94rem;
+  line-height: 1.55;
+  color: rgba(0,0,0,.58);
+}
+
+.panel--navigation .nav-panel__grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.panel--navigation .nav-shortcut{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 78px;
+  padding: 14px 14px 14px 16px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255,255,255,.46);
+  border: 1px solid rgba(255,255,255,.68);
+  box-shadow: 0 10px 30px rgba(47,111,85,.06);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.panel--navigation .nav-shortcut:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.60);
+  border-color: rgba(47,111,85,.18);
+  box-shadow: 0 14px 36px rgba(47,111,85,.10);
+}
+
+.panel--navigation .nav-shortcut:focus-visible{
+  outline: none;
+  border-color: rgba(47,111,85,.42);
+  box-shadow: 0 0 0 3px rgba(47,111,85,.16);
+  background: rgba(255,255,255,.70);
+}
+
+.panel--navigation .nav-shortcut__content{
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.panel--navigation .nav-shortcut__title{
+  font-weight: 900;
+  font-size: 1rem;
+  color: rgba(0,0,0,.76);
+}
+
+.panel--navigation .nav-shortcut__meta{
+  font-size: .87rem;
+  line-height: 1.4;
+  color: rgba(0,0,0,.54);
+}
+
+.panel--navigation .nav-shortcut__arrow{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 999px;
+  background: rgba(47,111,85,.10);
+  color: rgba(47,111,85,.88);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+@media (max-width: 640px){
+  .panel--navigation .nav-panel__grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark mode: dashboard navigation panel */
+html[data-theme="dark"] .panel--navigation .nav-panel__grid .nav-shortcut,
+html[data-theme="dark"] .panel--navigation .nav-panel__head{
+  background: rgba(18,25,29,.78);
+  border-color: rgba(255,255,255,.08);
+}
+html[data-theme="dark"] .panel--navigation .nav-panel__eyebrow,
+html[data-theme="dark"] .panel--navigation .nav-panel__desc,
+html[data-theme="dark"] .panel--navigation .nav-shortcut__meta{
+  color: rgba(213,223,219,.68);
+}
+html[data-theme="dark"] .panel--navigation .nav-panel__title,
+html[data-theme="dark"] .panel--navigation .nav-shortcut__title{
+  color: rgba(239,246,243,.92);
+}
+html[data-theme="dark"] .panel--navigation .nav-shortcut__arrow{
+  background: rgba(47,111,85,.18);
+  color: rgba(173,227,199,.92);
+}
+
+/* Dark mode: dashboard navigation deeper surfaces */
+html[data-theme="dark"] .panel--navigation .nav-shortcut{
+  background: rgba(18,27,33,.92);
+  border-color: rgba(255,255,255,.08);
+  box-shadow: none;
+}
+html[data-theme="dark"] .panel--navigation .nav-shortcut:hover,
+html[data-theme="dark"] .panel--navigation .nav-shortcut:focus-visible{
+  background: rgba(24,35,42,.96);
+  border-color: rgba(255,255,255,.10);
+}

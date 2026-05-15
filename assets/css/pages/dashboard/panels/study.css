@@ -1,0 +1,46 @@
+   - Styles scoped to Study Panel only.
+   - Keep UI identical; just moved out of app.css to reduce cross-panel bleed.
+*/
+
+.panel--study .study-grid{
+  padding: 0 18px 12px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.panel--study .study-card{
+  border-radius: 14px;
+  background: rgba(255,255,255,.60);
+  border: 1px solid rgba(255,255,255,.65);
+  padding: 12px;
+}
+
+.panel--study .study-card__top{ display:flex; justify-content:space-between; margin-bottom: 8px; }
+.panel--study .study-card__title{ font-weight: 900; color: rgba(0,0,0,.78); }
+.panel--study .study-card__hours{ font-weight: 900; color: rgba(0,0,0,.70); }
+.panel--study .study-card__bar{ position:relative; height: 10px; margin: 10px 0; border-radius: 999px; }
+.panel--study .study-card__track{ position:absolute; inset:0; border-radius: 999px; background: rgba(0,0,0,.10); }
+.panel--study .study-card__fill{ position:absolute; left:0; top:0; bottom:0; width: calc(var(--p) * 1%); border-radius: 999px; background: rgba(47,111,85,.80); }
+.panel--study .study-card__note{ color: rgba(0,0,0,.62); font-weight: 800; font-size: 13px; }
+
+@media (max-width: 640px){
+  .panel--study .study-grid{ grid-template-columns: 1fr; }
+}
+
+/* Dark mode: dashboard study panel */
+html[data-theme="dark"] .panel--study .study-card{
+  background: rgba(18,25,29,.78);
+  border-color: rgba(255,255,255,.08);
+}
+html[data-theme="dark"] .panel--study .study-card__title,
+html[data-theme="dark"] .panel--study .study-card__hours{
+  color: rgba(239,246,243,.92);
+}
+html[data-theme="dark"] .panel--study .study-card__track{ background: rgba(255,255,255,.08); }
+html[data-theme="dark"] .panel--study .study-card__note{ color: rgba(213,223,219,.66); }
+
+/* Dark mode: dashboard study deeper surfaces */
+html[data-theme="dark"] .panel--study .study-card{
+  background: rgba(18,27,33,.92);
+}

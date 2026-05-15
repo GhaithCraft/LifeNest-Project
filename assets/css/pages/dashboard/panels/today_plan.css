@@ -1,0 +1,1402 @@
+.panel--today-plan .today-plan{
+  padding: 0 18px 18px;
+}
+
+.panel--today-plan .today-plan__layout{
+  display:grid;
+  grid-template-columns: minmax(0, 1.42fr) minmax(280px, .9fr);
+  gap: 18px;
+  align-items:start;
+}
+
+.panel--today-plan .today-plan__main,
+.panel--today-plan .today-plan__side{
+  display:grid;
+  gap: 14px;
+  min-width:0;
+}
+
+.panel--today-plan .today-plan__intro{
+  margin-top: -2px;
+  color: rgba(0,0,0,.55);
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.panel--today-plan .today-plan__block{
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(248,250,255,.82));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.52);
+}
+
+.panel--today-plan .today-plan__block--stats,
+.panel--today-plan .today-plan__block--schedule{
+  background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(249,251,255,.9));
+}
+
+.panel--today-plan .today-plan__block-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.panel--today-plan .today-plan__block-kicker{
+  color: rgba(0,0,0,.48);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.panel--today-plan .today-plan__block-title{
+  margin-top: 4px;
+  color: rgba(0,0,0,.82);
+  font-size: 15px;
+  font-weight: 950;
+  line-height: 1.2;
+}
+
+.panel--today-plan .today-plan__main > .subhead,
+.panel--today-plan .today-plan__side > .subhead,
+.panel--today-plan .today-plan__main > .subhead--mt,
+.panel--today-plan .today-plan__side > .subhead--mt{
+  display:none;
+}
+
+.panel--today-plan .today-plan__decision,
+.panel--today-plan .today-plan__manual,
+.panel--today-plan .today-plan__expense{
+  margin-top: 0;
+}
+
+.panel--today-plan .today-plan__stats,
+.panel--today-plan .today-plan__schedule,
+.panel--today-plan .today-plan__queue,
+.panel--today-plan .today-plan__warnings,
+.panel--today-plan .prio-list,
+.panel--today-plan .time-blocks{
+  margin-top: 0;
+}
+
+.panel--today-plan .today-plan__actions{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0;
+}
+
+.panel--today-plan .today-plan__block--warnings .today-plan__warnings:empty::before,
+.panel--today-plan .today-plan__block--queue .today-plan__queue:empty::before,
+.panel--today-plan .today-plan__block .prio-list:empty::before,
+.panel--today-plan .today-plan__block .time-blocks:empty::before,
+.panel--today-plan .today-plan__block--schedule .today-plan__schedule:empty::before{
+  content: "Waiting for planner data…";
+  display:block;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.58);
+  color: rgba(0,0,0,.52);
+  font-size: 13px;
+  font-weight: 800;
+}
+.panel--today-plan .today-plan,
+.panel--today-plan .today-plan__col,
+.panel--today-plan .prio-list,
+.panel--today-plan .time-blocks,
+.panel--today-plan .today-plan__stats,
+.panel--today-plan .today-plan__warnings,
+.panel--today-plan .today-plan__schedule,
+.panel--today-plan .today-plan__queue,
+.panel--today-plan .today-plan__actions,
+.panel--today-plan .today-plan__manual{ min-width: 0; }
+
+.panel--today-plan .prio-list{ display:grid; gap: 12px; }
+
+.panel--today-plan .prio-row{
+  display:grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items:center;
+  gap: 12px;
+}
+
+.panel--today-plan .prio-row__text{
+  font-weight: 800;
+  color: rgba(0,0,0,.78);
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.panel--today-plan .prio-row.is-pending{ opacity: .45; pointer-events:none; }
+.panel--today-plan .time-blocks{ display:grid; gap: 10px; }
+
+.panel--today-plan .time-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.45);
+  border: 1px solid rgba(255,255,255,.65);
+  position:relative;
+  overflow:hidden;
+}
+
+.panel--today-plan .time-row:before{
+  content:"";
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width: 6px;
+  border-radius: 14px 0 0 14px;
+}
+
+.panel--today-plan .time-row--focus:before{ background: rgba(47,111,85,.82); }
+.panel--today-plan .time-row--admin:before{ background: rgba(78,155,207,.70); }
+.panel--today-plan .time-row--low:before{ background: rgba(250,210,120,.90); }
+
+.panel--today-plan .time-row__name{ font-weight: 900; color: rgba(0,0,0,.72); overflow-wrap: anywhere; }
+.panel--today-plan .time-row__time{ font-weight: 800; color: rgba(0,0,0,.62); text-align: end; }
+
+.panel--today-plan .today-plan__stats{
+  display:grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.panel--today-plan .tp-stat{
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.68);
+  background: rgba(255,255,255,.46);
+  padding: 11px 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+.panel--today-plan .tp-stat__label{
+  color: rgba(0,0,0,.54);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.panel--today-plan .tp-stat__value{
+  margin-top: 6px;
+  color: rgba(0,0,0,.84);
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+}
+
+.panel--today-plan .tp-stat--warn .tp-stat__value{ color: #a44c17; }
+.panel--today-plan .tp-stat--danger .tp-stat__value{ color: #b23a3a; }
+.panel--today-plan .tp-stat--lock .tp-stat__value{ color: #355ea8; }
+
+.panel--today-plan .today-plan__warnings{
+  display:grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.panel--today-plan .tp-warning{
+  display:flex;
+  align-items:flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.52);
+}
+
+.panel--today-plan .tp-warning__dot{
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+  border-radius: 999px;
+  margin-top: 5px;
+  background: rgba(0,0,0,.28);
+}
+.panel--today-plan .tp-warning--warn .tp-warning__dot{ background: #d48a1b; }
+.panel--today-plan .tp-warning--danger .tp-warning__dot{ background: #c74949; }
+.panel--today-plan .tp-warning--info .tp-warning__dot{ background: #4b8cc7; }
+.panel--today-plan .tp-warning--lock .tp-warning__dot{ background: #4c74bf; }
+
+.panel--today-plan .tp-warning__text{
+  color: rgba(0,0,0,.72);
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.panel--today-plan .today-plan__manual{
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(73, 106, 182, .18);
+  background: linear-gradient(180deg, rgba(255,255,255,.70), rgba(245,248,255,.82));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55);
+}
+
+.panel--today-plan .today-plan__manual-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 12px;
+}
+
+.panel--today-plan .today-plan__manual-label{
+  color: rgba(52,86,155,.78);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+
+.panel--today-plan .today-plan__manual-title{
+  margin-top: 4px;
+  color: rgba(0,0,0,.82);
+  font-weight: 950;
+  font-size: 15px;
+}
+
+.panel--today-plan .today-plan__manual-close{
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.72);
+  color: rgba(0,0,0,.62);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.panel--today-plan .today-plan__manual-grid{
+  display:grid;
+  grid-template-columns: 1.2fr minmax(180px, .9fr) minmax(140px, .7fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.panel--today-plan .today-plan__manual-card{
+  min-width: 0;
+  border-radius: 14px;
+  padding: 11px 12px;
+  border: 1px solid rgba(255,255,255,.72);
+  background: rgba(255,255,255,.64);
+}
+
+.panel--today-plan .today-plan__manual-card--field{ display:block; }
+.panel--today-plan .today-plan__manual-card--field .input{ margin-top: 6px; width: 100%; }
+
+.panel--today-plan .today-plan__manual-card-label{
+  color: rgba(0,0,0,.54);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.panel--today-plan .today-plan__manual-task,
+.panel--today-plan .today-plan__manual-duration{
+  margin-top: 6px;
+  color: rgba(0,0,0,.82);
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.panel--today-plan .today-plan__manual-hint{
+  margin-top: 10px;
+  color: rgba(0,0,0,.62);
+  font-size: 12px;
+  font-weight: 800;
+  min-height: 18px;
+}
+.panel--today-plan .today-plan__manual-hint.is-error{ color: #b23a3a; }
+.panel--today-plan .today-plan__manual-hint.is-info{ color: #355ea8; }
+
+.panel--today-plan .today-plan__manual-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.panel--today-plan .today-plan__schedule,
+.panel--today-plan .today-plan__queue{
+  display:grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.panel--today-plan .tp-row{
+  display:grid;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items:center;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.68);
+  background: rgba(255,255,255,.56);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.34);
+}
+
+.panel--today-plan .tp-row--task{
+  cursor:pointer;
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+.panel--today-plan .tp-row--task:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(27,39,79,.06), inset 0 1px 0 rgba(255,255,255,.34);
+}
+.panel--today-plan .tp-row--task:focus-visible{
+  outline: 2px solid rgba(62,122,255,.45);
+  outline-offset: 2px;
+}
+.panel--today-plan .tp-row--locked{
+  border-style: dashed;
+  border-color: rgba(73,106,182,.26);
+  background: rgba(245,248,255,.72);
+}
+.panel--today-plan .tp-row--task[data-activity="started"]{
+  border-color: rgba(47,111,85,.24);
+  box-shadow: 0 10px 18px rgba(47,111,85,.05), inset 0 1px 0 rgba(255,255,255,.34);
+}
+.panel--today-plan .tp-row--empty,
+.panel--today-plan .tp-row--muted{ grid-template-columns: 1fr; cursor: default; }
+.panel--today-plan .tp-row--muted{ opacity: .84; }
+
+.panel--today-plan .tp-row__time{
+  color: rgba(0,0,0,.64);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.panel--today-plan .tp-row__main{ min-width: 0; }
+.panel--today-plan .tp-row__title{
+  color: rgba(0,0,0,.84);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.panel--today-plan .tp-row__meta{
+  margin-top: 5px;
+  color: rgba(0,0,0,.58);
+  font-size: 12px;
+  font-weight: 800;
+  display:flex;
+  flex-wrap:wrap;
+  gap: 6px 10px;
+}
+.panel--today-plan .tp-row__meta span{ white-space: nowrap; }
+.panel--today-plan .tp-row__side{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap: 8px;
+  align-items:center;
+}
+
+.panel--today-plan .tp-chip{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .01em;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(0,0,0,.04);
+  color: rgba(0,0,0,.72);
+}
+.panel--today-plan .tp-chip--focus{ background: rgba(47,111,85,.12); color: #2f6f55; }
+.panel--today-plan .tp-chip--admin{ background: rgba(78,155,207,.12); color: #3677aa; }
+.panel--today-plan .tp-chip--low{ background: rgba(250,210,120,.22); color: #946311; }
+.panel--today-plan .tp-chip--high{ background: rgba(196,73,73,.12); color: #a63a3a; }
+.panel--today-plan .tp-chip--medium{ background: rgba(212,138,27,.13); color: #9c650d; }
+.panel--today-plan .tp-chip--light{ background: rgba(0,0,0,.04); color: rgba(0,0,0,.66); }
+.panel--today-plan .tp-chip--lock{ background: rgba(76,116,191,.12); color: #355ea8; }
+.panel--today-plan .tp-chip--started{ background: rgba(47,111,85,.12); color: #2f6f55; }
+.panel--today-plan .tp-chip--postponed{ background: rgba(166,58,58,.10); color: #9d3f3f; }
+
+.panel--today-plan .tp-action{
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.74);
+  color: rgba(0,0,0,.72);
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.panel--today-plan .tp-action:hover{ background: rgba(255,255,255,.95); }
+.panel--today-plan .tp-action--lock{ color: #355ea8; }
+.panel--today-plan .tp-action--unlock{ color: #a63a3a; }
+.panel--today-plan .tp-action--manual{ color: #6a4d08; }
+.panel--today-plan .tp-action--start{ color: #2f6f55; }
+.panel--today-plan .tp-action--complete{ color: #1f6f49; }
+.panel--today-plan .tp-action--postpone{ color: #a63a3a; }
+
+.panel--today-plan .today-plan__actions{ display:grid; gap: 10px; margin-top: 14px; }
+.panel--today-plan .today-plan__actions--mobile{ display:none; }
+.panel--today-plan .muted{ color: rgba(0,0,0,.55); font-weight: 800; }
+
+@media (max-width: 1100px){
+  .panel--today-plan .today-plan__layout{ grid-template-columns: 1fr; }
+  .panel--today-plan .today-plan__side{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .panel--today-plan .today-plan__stats{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 980px){
+  .panel--today-plan .today-plan__manual-grid{ grid-template-columns: 1fr 1fr; }
+  .panel--today-plan .today-plan__manual-card:last-child{ grid-column: 1 / -1; }
+}
+
+@media (max-width: 760px){
+  .panel--today-plan .today-plan__side{ grid-template-columns: 1fr; }
+  .panel--today-plan .today-plan__actions{ grid-template-columns: 1fr; }
+  .panel--today-plan .today-plan__stats{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .panel--today-plan .tp-row{ grid-template-columns: 1fr; }
+  .panel--today-plan .tp-row__time{ text-align: start; }
+  .panel--today-plan .tp-row__side{ justify-content:flex-start; }
+}
+
+@media (max-width: 640px){
+  .panel--today-plan .today-plan{ padding: 0 14px 14px; }
+  .panel--today-plan .today-plan__block{ padding: 12px; }
+  .panel--today-plan .today-plan__actions--desktop{ display:none; }
+  .panel--today-plan .today-plan__actions--mobile{ display:grid; }
+  .panel--today-plan .today-plan__stats{ grid-template-columns: 1fr 1fr; }
+  .panel--today-plan .today-plan__manual-grid{ grid-template-columns: 1fr; }
+  .panel--today-plan .today-plan__manual-actions{ flex-direction: column-reverse; }
+  .panel--today-plan .today-plan__manual-actions .btn{ width: 100%; }
+}
+
+
+.panel--today-plan .today-plan__decision{
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(248,250,255,.82));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.52);
+}
+
+.panel--today-plan .today-plan__decision--rescue{
+  border-color: rgba(189,76,76,.18);
+  background: linear-gradient(180deg, rgba(255,250,250,.88), rgba(255,241,241,.96));
+}
+
+.panel--today-plan .today-plan__decision--caution{
+  border-color: rgba(205,141,31,.22);
+  background: linear-gradient(180deg, rgba(255,252,246,.88), rgba(255,247,232,.96));
+}
+
+.panel--today-plan .today-plan__decision--balanced{
+  border-color: rgba(63,113,197,.16);
+  background: linear-gradient(180deg, rgba(248,251,255,.88), rgba(242,247,255,.96));
+}
+
+.panel--today-plan .today-plan__decision-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 12px;
+}
+
+.panel--today-plan .today-plan__decision-label{
+  color: rgba(0,0,0,.52);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+
+.panel--today-plan .today-plan__decision-title{
+  margin-top: 4px;
+  color: rgba(0,0,0,.88);
+  font-size: 16px;
+  font-weight: 950;
+  line-height: 1.35;
+}
+
+.panel--today-plan .today-plan__decision-mode{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width: 108px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .02em;
+  background: rgba(0,0,0,.06);
+  color: rgba(0,0,0,.7);
+}
+
+.panel--today-plan .today-plan__decision--rescue .today-plan__decision-mode{
+  background: rgba(184,72,72,.12);
+  color: #a33d3d;
+}
+
+.panel--today-plan .today-plan__decision--caution .today-plan__decision-mode{
+  background: rgba(212,138,27,.14);
+  color: #9b650e;
+}
+
+.panel--today-plan .today-plan__decision--balanced .today-plan__decision-mode{
+  background: rgba(75,140,199,.12);
+  color: #355ea8;
+}
+
+.panel--today-plan .today-plan__decision-body{
+  margin-top: 10px;
+  color: rgba(0,0,0,.7);
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.panel--today-plan .today-plan__decision-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.panel--today-plan .today-plan__decision-chip{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(255,255,255,.78);
+  color: rgba(0,0,0,.66);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.panel--today-plan .today-plan__decision-list{
+  display:grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.panel--today-plan .today-plan__decision-item{
+  display:flex;
+  align-items:flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.58);
+  border: 1px solid rgba(255,255,255,.7);
+}
+
+.panel--today-plan .today-plan__decision-item-dot{
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 999px;
+  margin-top: 6px;
+  background: rgba(0,0,0,.25);
+}
+
+.panel--today-plan .today-plan__decision--rescue .today-plan__decision-item-dot{ background: #c74949; }
+.panel--today-plan .today-plan__decision--caution .today-plan__decision-item-dot{ background: #d48a1b; }
+.panel--today-plan .today-plan__decision--balanced .today-plan__decision-item-dot{ background: #4b8cc7; }
+
+.panel--today-plan .today-plan__decision-item-text{
+  color: rgba(0,0,0,.72);
+  font-weight: 760;
+  line-height: 1.45;
+}
+
+@media (max-width: 760px){
+  .panel--today-plan .today-plan__decision-head{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .panel--today-plan .today-plan__decision-mode{
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+
+.panel--today-plan .today-plan__expense{
+  margin-top: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.74), rgba(245,252,248,.86));
+  padding: 14px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.06);
+}
+.panel--today-plan .today-plan__expense-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 12px;
+}
+.panel--today-plan .today-plan__expense-label{
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: rgba(0,0,0,.46);
+}
+.panel--today-plan .today-plan__expense-title{
+  margin-top: 4px;
+  font-size: 18px;
+  font-weight: 1000;
+  color: rgba(0,0,0,.82);
+}
+.panel--today-plan .today-plan__expense-badge{
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 950;
+  color: #355ea8;
+  background: rgba(76,116,191,.12);
+  border: 1px solid rgba(76,116,191,.16);
+  white-space: nowrap;
+}
+.panel--today-plan .today-plan__expense-stats{
+  margin-top: 12px;
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 10px;
+}
+.panel--today-plan .today-plan__expense-card{
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.72);
+  padding: 10px 12px;
+  min-width: 0;
+}
+.panel--today-plan .today-plan__expense-card-label{
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(0,0,0,.5);
+}
+.panel--today-plan .today-plan__expense-card-value{
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 1000;
+  color: rgba(0,0,0,.82);
+  overflow-wrap: anywhere;
+}
+.panel--today-plan .today-plan__expense-hint{
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(0,0,0,.66);
+  font-weight: 850;
+}
+.panel--today-plan .tp-chip--expense{
+  background: rgba(33,127,102,.12);
+  color: #1f6f49;
+}
+.panel--today-plan .tp-action--expense{ color: #1f6f49; }
+@media (max-width: 860px){
+  .panel--today-plan .today-plan__expense-stats{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 620px){
+  .panel--today-plan .today-plan__expense-head{ flex-direction: column; }
+  .panel--today-plan .today-plan__expense-badge{ white-space: normal; }
+  .panel--today-plan .today-plan__expense-stats{ grid-template-columns: 1fr; }
+}
+
+
+.panel--today-plan .today-plan__expense--cost{
+  border-color: rgba(233, 162, 42, .22);
+  background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,246,232,.94));
+}
+.panel--today-plan .today-plan__expense--cost .today-plan__expense-badge{
+  background: rgba(233, 162, 42, .14);
+  color: #8b5a06;
+}
+.panel--today-plan .today-plan__expense--cost .today-plan__expense-card-value{
+  color: #704a08;
+}
+.panel--today-plan .today-plan,
+.panel--today-plan .today-plan__layout,
+.panel--today-plan .today-plan__main,
+.panel--today-plan .today-plan__side,
+.panel--today-plan .today-plan__block,
+.panel--today-plan .today-plan__decision,
+.panel--today-plan .today-plan__schedule,
+.panel--today-plan .today-plan__queue,
+.panel--today-plan .today-plan__stats,
+.panel--today-plan .prio-list,
+.panel--today-plan .time-blocks{
+  overflow: visible;
+}
+
+.panel--today-plan .today-plan{
+  padding: 0 18px 18px;
+}
+
+.panel--today-plan .today-plan__layout{
+  grid-template-columns: minmax(0, 1.55fr) minmax(300px, .82fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.panel--today-plan .today-plan__main,
+.panel--today-plan .today-plan__side{
+  gap: 12px;
+  align-content: start;
+}
+
+.panel--today-plan .today-plan__block,
+.panel--today-plan .today-plan__decision,
+.panel--today-plan .today-plan__manual{
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.panel--today-plan .today-plan__block-head{
+  margin-bottom: 10px;
+}
+
+.panel--today-plan .today-plan__block-kicker,
+.panel--today-plan .today-plan__decision-label,
+.panel--today-plan .today-plan__intro,
+.panel--today-plan .today-plan__decision-body,
+.panel--today-plan .today-plan__decision-list,
+.panel--today-plan .today-plan__expense,
+.panel--today-plan .today-plan__block--warnings{
+  display: none !important;
+}
+
+.panel--today-plan .today-plan__block-title,
+.panel--today-plan .today-plan__manual-title{
+  margin-top: 0;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.panel--today-plan .today-plan__decision-head{
+  align-items: center;
+}
+
+.panel--today-plan .today-plan__decision-title{
+  margin-top: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.panel--today-plan .today-plan__decision-mode{
+  min-width: 96px;
+  padding: 7px 10px;
+  font-size: 11px;
+}
+
+.panel--today-plan .today-plan__decision-meta{
+  margin-top: 10px;
+  gap: 7px;
+}
+
+.panel--today-plan .today-plan__decision-chip,
+.panel--today-plan .tp-chip{
+  padding: 6px 9px;
+  min-height: 26px;
+  font-size: 11px;
+}
+
+.panel--today-plan .today-plan__stats{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.panel--today-plan .tp-stat{
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.panel--today-plan .tp-stat__label{
+  font-size: 11px;
+}
+
+.panel--today-plan .tp-stat__value{
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.panel--today-plan .prio-list,
+.panel--today-plan .time-blocks,
+.panel--today-plan .today-plan__queue,
+.panel--today-plan .today-plan__schedule{
+  gap: 8px;
+}
+
+.panel--today-plan .prio-row,
+.panel--today-plan .tp-row{
+  gap: 10px;
+}
+
+.panel--today-plan .time-row{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px 9px 14px;
+  border-radius: 12px;
+}
+
+.panel--today-plan .time-row__name,
+.panel--today-plan .tp-row__title,
+.panel--today-plan .prio-row__text{
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.panel--today-plan .time-row__time,
+.panel--today-plan .tp-row__time{
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.panel--today-plan .tp-row{
+  grid-template-columns: 96px minmax(0, 1fr) auto;
+  padding: 10px 12px;
+  border-radius: 14px;
+}
+
+.panel--today-plan .tp-row__meta{
+  margin-top: 4px;
+  gap: 5px 8px;
+}
+
+.panel--today-plan .tp-row__meta span{
+  white-space: normal;
+}
+
+.panel--today-plan .today-plan__actions{
+  margin-top: 4px;
+}
+
+.panel--today-plan .today-plan__block .prio-list:empty::before,
+.panel--today-plan .today-plan__block .time-blocks:empty::before,
+.panel--today-plan .today-plan__block--queue .today-plan__queue:empty::before,
+.panel--today-plan .today-plan__block--schedule .today-plan__schedule:empty::before{
+  content: "No data yet.";
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+@media (max-width: 1200px){
+  .panel--today-plan .today-plan__layout{
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+  .panel--today-plan .today-plan__stats{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px){
+  .panel--today-plan .today-plan__layout{
+    grid-template-columns: 1fr;
+  }
+  .panel--today-plan .today-plan__stats{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px){
+  .panel--today-plan .today-plan{
+    padding: 0 14px 14px;
+  }
+  .panel--today-plan .today-plan__stats,
+  .panel--today-plan .tp-row,
+  .panel--today-plan .time-row{
+    grid-template-columns: 1fr;
+  }
+  .panel--today-plan .today-plan__decision-head{
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .panel--today-plan .today-plan__decision-mode,
+  .panel--today-plan .tp-row__time,
+  .panel--today-plan .time-row__time{
+    white-space: normal;
+    text-align: start;
+  }
+  .panel--today-plan .tp-row__side{
+    justify-content: flex-start;
+  }
+}
+
+
+/* ===== Timeline row layout hardening =====
+   Prevents task titles from collapsing letter-by-letter when action pills are numerous.
+   Strategy:
+   - Keep the time in a fixed first column.
+   - Give the content block the full main row.
+   - Move actions/chips under the content block instead of squeezing beside the title.
+   - Restore natural word wrapping for titles. */
+.panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted){
+  grid-template-columns: 104px minmax(0, 1fr);
+  grid-template-areas:
+    "time main"
+    "time side";
+  align-items: start;
+}
+
+.panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted) .tp-row__time{
+  grid-area: time;
+  align-self: start;
+  padding-top: 4px;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted) .tp-row__main{
+  grid-area: main;
+  min-width: 0;
+}
+
+.panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted) .tp-row__title{
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted) .tp-row__meta{
+  min-width: 0;
+}
+
+.panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted) .tp-row__meta span{
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted) .tp-row__side{
+  grid-area: side;
+  min-width: 0;
+  align-self: start;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted) .tp-chip,
+.panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted) .tp-action{
+  flex: 0 0 auto;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px){
+  .panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted){
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "time"
+      "main"
+      "side";
+  }
+
+  .panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted) .tp-row__time{
+    padding-top: 0;
+    white-space: normal;
+  }
+}
+
+
+/* ===== Compact details trigger without breaking dark mode ===== */
+.panel--today-plan .tp-action--details{
+  color: rgba(0,0,0,.78);
+  border-color: rgba(0,0,0,.10);
+}
+
+.panel--today-plan .today-plan-detail__panel{
+  width: min(680px, calc(100vw - 28px));
+}
+
+.panel--today-plan .today-plan-detail__body{
+  display: grid;
+  gap: 14px;
+}
+
+.panel--today-plan .today-plan-detail__eyebrow{
+  color: rgba(0,0,0,.52);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.panel--today-plan .today-plan-detail__summary{
+  color: rgba(0,0,0,.84);
+  font-size: 22px;
+  font-weight: 950;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.panel--today-plan .today-plan-detail__meta{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.panel--today-plan .today-plan-detail__meta-item{
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(248,250,255,.98));
+}
+
+.panel--today-plan .today-plan-detail__meta-label{
+  display: block;
+  color: rgba(0,0,0,.50);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.panel--today-plan .today-plan-detail__meta-value{
+  display: block;
+  margin-top: 6px;
+  color: rgba(0,0,0,.82);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.panel--today-plan .today-plan-detail__chips,
+.panel--today-plan .today-plan-detail__actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-row,
+html[data-theme="dark"] .panel--today-plan .tp-row--locked,
+html[data-theme="dark"] .panel--today-plan .tp-row--task[data-activity="started"],
+html[data-theme="dark"] .panel--today-plan .tp-row--empty,
+html[data-theme="dark"] .panel--today-plan .tp-row--muted,
+html[data-theme="dark"] .panel--today-plan .tp-stat,
+html[data-theme="dark"] .panel--today-plan .time-row,
+html[data-theme="dark"] .panel--today-plan .today-plan__block .prio-list:empty::before,
+html[data-theme="dark"] .panel--today-plan .today-plan__block .time-blocks:empty::before,
+html[data-theme="dark"] .panel--today-plan .today-plan__block--queue .today-plan__queue:empty::before,
+html[data-theme="dark"] .panel--today-plan .today-plan__block--schedule .today-plan__schedule:empty::before,
+html[data-theme="dark"] .panel--today-plan .today-plan-detail__meta-item{
+  background: linear-gradient(180deg, rgba(9, 28, 44, .96), rgba(8, 24, 38, .96));
+  border-color: rgba(120, 168, 200, .16);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-row__title,
+html[data-theme="dark"] .panel--today-plan .tp-row__time,
+html[data-theme="dark"] .panel--today-plan .today-plan-detail__summary,
+html[data-theme="dark"] .panel--today-plan .today-plan-detail__meta-value{
+  color: rgba(233,241,247,.94);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-row__meta,
+html[data-theme="dark"] .panel--today-plan .today-plan-detail__eyebrow,
+html[data-theme="dark"] .panel--today-plan .today-plan-detail__meta-label{
+  color: rgba(184,203,216,.74);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-chip,
+html[data-theme="dark"] .panel--today-plan .tp-action{
+  background: rgba(255,255,255,.05);
+  border-color: rgba(120,168,200,.16);
+  color: rgba(233,241,247,.92);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-action:hover,
+html[data-theme="dark"] .panel--today-plan .tp-action:focus-visible{
+  background: rgba(255,255,255,.09);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-chip--light{
+  color: rgba(233,241,247,.78);
+}
+
+html[data-theme="dark"] .panel--today-plan .ln-modal__title{
+  color: rgba(239,246,243,.94);
+}
+
+@media (max-width: 640px){
+  .panel--today-plan .today-plan-detail__meta{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== v6 aesthetic reconciliation hotfix =====
+   Goal: make Today Plan match the rest of the dark dashboard instead of
+   white outer containers with dark inner rows. Keep View details + popup. */
+html[data-theme="dark"] .panel--today-plan .today-plan__block,
+html[data-theme="dark"] .panel--today-plan .today-plan__decision,
+html[data-theme="dark"] .panel--today-plan .today-plan__manual,
+html[data-theme="dark"] .panel--today-plan .today-plan__expense,
+html[data-theme="dark"] .panel--today-plan .today-plan-detail__panel{
+  background: linear-gradient(180deg, rgba(8,18,27,.92), rgba(6,14,22,.96));
+  border: 1px solid rgba(96,144,178,.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 14px 28px rgba(0,0,0,.24);
+}
+
+html[data-theme="dark"] .panel--today-plan .today-plan__block-title,
+html[data-theme="dark"] .panel--today-plan .today-plan__manual-title,
+html[data-theme="dark"] .panel--today-plan .today-plan__decision-title,
+html[data-theme="dark"] .panel--today-plan .today-plan__expense-title{
+  color: rgba(236,244,248,.96);
+}
+
+html[data-theme="dark"] .panel--today-plan .today-plan__block-kicker,
+html[data-theme="dark"] .panel--today-plan .today-plan__manual-label,
+html[data-theme="dark"] .panel--today-plan .today-plan__decision-label,
+html[data-theme="dark"] .panel--today-plan .today-plan__expense-label,
+html[data-theme="dark"] .panel--today-plan .today-plan__manual-card-label,
+html[data-theme="dark"] .panel--today-plan .muted,
+html[data-theme="dark"] .panel--today-plan .today-plan__manual-hint,
+html[data-theme="dark"] .panel--today-plan .today-plan__expense-hint,
+html[data-theme="dark"] .panel--today-plan .today-plan__decision-body,
+html[data-theme="dark"] .panel--today-plan .today-plan__decision-item-text{
+  color: rgba(177,196,210,.76);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-stat,
+html[data-theme="dark"] .panel--today-plan .time-row,
+html[data-theme="dark"] .panel--today-plan .today-plan__manual-card,
+html[data-theme="dark"] .panel--today-plan .today-plan__decision-chip,
+html[data-theme="dark"] .panel--today-plan .today-plan__decision-item,
+html[data-theme="dark"] .panel--today-plan .today-plan__expense-card,
+html[data-theme="dark"] .panel--today-plan .today-plan-detail__meta-item{
+  background: linear-gradient(180deg, rgba(9,27,42,.92), rgba(8,22,34,.94));
+  border-color: rgba(96,144,178,.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-stat__label,
+html[data-theme="dark"] .panel--today-plan .today-plan__expense-card-label{
+  color: rgba(168,190,205,.70);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-stat__value,
+html[data-theme="dark"] .panel--today-plan .today-plan__expense-card-value,
+html[data-theme="dark"] .panel--today-plan .today-plan__manual-task,
+html[data-theme="dark"] .panel--today-plan .today-plan__manual-duration{
+  color: rgba(236,244,248,.95);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted){
+  background: linear-gradient(180deg, rgba(8,26,40,.94), rgba(7,21,33,.96));
+  border: 1px solid rgba(96,144,178,.18);
+  border-radius: 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+  padding: 14px 16px;
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-row--task:hover,
+html[data-theme="dark"] .panel--today-plan .tp-row--task:focus-visible{
+  background: linear-gradient(180deg, rgba(10,31,48,.96), rgba(8,24,38,.98));
+  border-color: rgba(110,163,201,.26);
+  transform: none;
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-row__time{
+  color: rgba(154,182,201,.82);
+  font-weight: 900;
+  letter-spacing: -.01em;
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-row__title{
+  color: rgba(239,246,250,.96);
+  font-weight: 900;
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-row__meta,
+html[data-theme="dark"] .panel--today-plan .tp-row__meta span{
+  color: rgba(177,196,210,.76);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-row__side{
+  margin-top: 2px;
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-chip,
+html[data-theme="dark"] .panel--today-plan .tp-action{
+  background: rgba(255,255,255,.06);
+  border-color: rgba(96,144,178,.16);
+  color: rgba(228,238,245,.92);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-action--details{
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+  color: rgba(236,244,248,.94);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-action:hover,
+html[data-theme="dark"] .panel--today-plan .tp-action:focus-visible{
+  background: rgba(255,255,255,.10);
+  border-color: rgba(121,176,216,.24);
+}
+
+html[data-theme="dark"] .panel--today-plan .tp-row--empty,
+html[data-theme="dark"] .panel--today-plan .tp-row--muted,
+html[data-theme="dark"] .panel--today-plan .today-plan__block .prio-list:empty::before,
+html[data-theme="dark"] .panel--today-plan .today-plan__block .time-blocks:empty::before,
+html[data-theme="dark"] .panel--today-plan .today-plan__block--queue .today-plan__queue:empty::before,
+html[data-theme="dark"] .panel--today-plan .today-plan__block--schedule .today-plan__schedule:empty::before{
+  background: linear-gradient(180deg, rgba(10,26,39,.88), rgba(8,20,31,.92));
+  border: 1px solid rgba(96,144,178,.14);
+  color: rgba(177,196,210,.76);
+}
+
+html[data-theme="dark"] .panel--today-plan .time-row__name,
+html[data-theme="dark"] .panel--today-plan .prio-row__text{
+  color: rgba(236,244,248,.94);
+}
+
+html[data-theme="dark"] .panel--today-plan .time-row__time{
+  color: rgba(154,182,201,.82);
+}
+
+html[data-theme="dark"] .panel--today-plan .today-plan__manual-close{
+  background: rgba(255,255,255,.06);
+  border-color: rgba(96,144,178,.16);
+  color: rgba(228,238,245,.80);
+}
+
+html[data-theme="dark"] .panel--today-plan .today-plan__manual-card--field .input,
+html[data-theme="dark"] .panel--today-plan #todayPlanManualStart{
+  background: rgba(255,255,255,.05);
+  border-color: rgba(96,144,178,.18);
+  color: rgba(236,244,248,.94);
+}
+
+html[data-theme="dark"] .panel--today-plan .today-plan__expense--cost{
+  background: linear-gradient(180deg, rgba(29,22,10,.92), rgba(22,17,8,.96));
+  border-color: rgba(209,160,62,.20);
+}
+
+html[data-theme="dark"] .panel--today-plan .today-plan__expense--cost .today-plan__expense-title,
+html[data-theme="dark"] .panel--today-plan .today-plan__expense--cost .today-plan__expense-card-value{
+  color: rgba(245,217,156,.96);
+}
+
+html[data-theme="dark"] .panel--today-plan .today-plan__expense--cost .today-plan__expense-badge{
+  background: rgba(209,160,62,.12);
+  border-color: rgba(209,160,62,.18);
+  color: rgba(245,217,156,.94);
+}
+
+/* Light mode consistency: keep the same soft-card language instead of harsh white blocks. */
+.panel--today-plan .today-plan__block,
+.panel--today-plan .today-plan__decision,
+.panel--today-plan .today-plan__manual,
+.panel--today-plan .today-plan__expense{
+  background: linear-gradient(180deg, rgba(255,255,255,.74), rgba(247,250,252,.84));
+}
+
+.panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted){
+  background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(247,250,252,.86));
+  border: 1px solid rgba(71,99,122,.10);
+  border-radius: 18px;
+  padding: 14px 16px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.46);
+}
+
+.panel--today-plan .tp-row--task:hover,
+.panel--today-plan .tp-row--task:focus-visible{
+  background: linear-gradient(180deg, rgba(255,255,255,.84), rgba(248,251,255,.92));
+  border-color: rgba(71,99,122,.16);
+  transform: none;
+}
+
+.panel--today-plan .tp-action--details{
+  background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(244,247,250,.96));
+}
+
+@media (max-width: 640px){
+  html[data-theme="dark"] .panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted),
+  .panel--today-plan .tp-row:not(.tp-row--empty):not(.tp-row--muted){
+    padding: 13px 14px;
+  }
+}
+
+/* Final Smart Schedule balance:
+   - Keep Today Metrics labels on one line without breaking words.
+   - Keep the information-heavy main column wider than the side column.
+   - Let stats cards reflow instead of crushing text. */
+.panel--today-plan .today-plan__layout{
+  grid-template-columns: minmax(0, 1.95fr) minmax(280px, .72fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.panel--today-plan .today-plan__main,
+.panel--today-plan .today-plan__side{
+  gap: 12px;
+  align-content: start;
+}
+
+.panel--today-plan .today-plan__stats{
+  grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
+  gap: 8px;
+}
+
+.panel--today-plan .tp-stat{
+  min-width: 0;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.panel--today-plan .tp-stat__label{
+  display: block;
+  font-size: 11px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.panel--today-plan .tp-stat__value{
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+@media (max-width: 1200px){
+  .panel--today-plan .today-plan__layout{
+    grid-template-columns: minmax(0, 1.45fr) 280px;
+  }
+
+  .panel--today-plan .today-plan__stats{
+    grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  }
+}
+
+@media (max-width: 980px){
+  .panel--today-plan .today-plan__layout{
+    grid-template-columns: 1fr;
+  }
+
+  .panel--today-plan .today-plan__stats{
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}

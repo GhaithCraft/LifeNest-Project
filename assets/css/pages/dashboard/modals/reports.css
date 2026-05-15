@@ -1,0 +1,183 @@
+/* --- Reports modal --- */
+.input--sm{ padding: 9px 10px; font-size: 13px; }
+.btn--sm{ padding: 8px 10px; font-size: 13px; }
+.rep-bar{ margin-top: 8px; }
+
+#modalReports .ln-modal__panel{
+  width: min(1040px, calc(100vw - 32px));
+  max-width: 1040px;
+  max-height: calc(100vh - 40px);
+  margin: 20px auto 0;
+  overflow: auto;
+}
+
+.ln-rep{ padding: 0 18px 18px; }
+.ln-rep,
+.ln-rep__grid,
+.ln-rep__card,
+.ln-rep__head,
+.ln-rep__controls,
+.ln-rep__kpis,
+.ln-kpi,
+.ln-rep__cats,
+.ln-rep__cat,
+.ln-rep__review,
+.ln-rep__review-kpis,
+.ln-rep__insights,
+.ln-rep__insight{
+  min-width: 0;
+}
+
+.ln-rep__grid{ display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 14px; }
+.ln-rep__card,
+.ln-rep__review{ border-radius: 16px; background: rgba(255,255,255,.72); border: 1px solid rgba(0,0,0,.08); padding: 14px; }
+.ln-rep__review{ margin-top: 14px; }
+.ln-rep__head{ display:flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.ln-rep__head--row{ align-items: flex-start; }
+.ln-rep__title{ font-weight: 950; letter-spacing: .2px; }
+.ln-rep__sub{ color: rgba(0,0,0,.55); font-weight: 800; font-size: 12px; overflow-wrap: anywhere; }
+.ln-rep__controls{ display:flex; align-items:flex-end; justify-content:flex-end; gap: 10px; flex-wrap: wrap; }
+.ln-rep__controls .ln-label{ margin-bottom: 0; align-self: center; }
+#reportsMonth{ min-width: 168px; }
+#btnReloadReports{ white-space: nowrap; }
+
+.ln-rep__kpis,
+.ln-rep__review-kpis{ display:grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 10px 0 6px; }
+.ln-kpi{ border-radius: 14px; background: rgba(0,0,0,.04); padding: 10px; border: 1px solid rgba(0,0,0,.06); }
+.ln-kpi__label{ color: rgba(0,0,0,.55); font-weight: 800; font-size: 12px; }
+.ln-kpi__value{ font-weight: 950; margin-top: 6px; overflow-wrap: anywhere; }
+.ln-rep__mini{ color: rgba(0,0,0,.62); font-weight: 800; font-size: 13px; margin-bottom: 8px; overflow-wrap: anywhere; }
+.ln-rep__cats{ display: grid; gap: 8px; margin-top: 10px; }
+.ln-rep__cat{ display:flex; justify-content: space-between; align-items: center; gap: 10px; border-radius: 12px; background: rgba(0,0,0,.03); border: 1px solid rgba(0,0,0,.06); padding: 10px; }
+.ln-rep__cat--empty{ justify-content: center; color: rgba(0,0,0,.55); }
+.ln-rep__cat-name{ font-weight: 900; overflow-wrap: anywhere; }
+.ln-rep__cat-amt{ color: rgba(0,0,0,.62); font-weight: 900; overflow-wrap: anywhere; text-align: end; }
+
+.ln-rep__review-head{ display:flex; align-items:flex-start; justify-content:space-between; gap: 12px; }
+.ln-rep__decision{
+  max-width: 340px;
+  border-radius: 999px;
+  padding: 9px 14px;
+  background: rgba(72, 118, 214, .10);
+  border: 1px solid rgba(72, 118, 214, .16);
+  color: rgba(34, 66, 132, .92);
+  font-weight: 850;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.ln-rep__insights{ display:grid; gap: 10px; margin-top: 12px; }
+.ln-rep__insight{
+  display:flex;
+  align-items:flex-start;
+  gap: 10px;
+  border-radius: 14px;
+  padding: 11px 12px;
+  background: rgba(0,0,0,.03);
+  border: 1px solid rgba(0,0,0,.06);
+}
+.ln-rep__insight-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  margin-top: 5px;
+  background: rgba(78, 118, 214, .82);
+  flex: 0 0 10px;
+}
+.ln-rep__insight-text{
+  color: rgba(0,0,0,.72);
+  font-weight: 780;
+  line-height: 1.5;
+}
+
+
+
+/* Dark mode: make Reports modal match the rest of the dashboard surfaces */
+html[data-theme="dark"] #modalReports .ln-modal__panel{
+  background: linear-gradient(180deg, rgba(11,17,21,.98), rgba(9,14,18,.96));
+}
+
+html[data-theme="dark"] #modalReports .ln-rep__card,
+html[data-theme="dark"] #modalReports .ln-rep__review{
+  background: linear-gradient(180deg, rgba(16,24,29,.98), rgba(12,19,23,.95));
+  border-color: rgba(255,255,255,.08);
+  box-shadow: 0 14px 34px rgba(0,0,0,.24);
+}
+
+html[data-theme="dark"] #modalReports .ln-rep__title,
+html[data-theme="dark"] #modalReports .ln-kpi__value,
+html[data-theme="dark"] #modalReports .ln-rep__cat-name,
+html[data-theme="dark"] #modalReports .ln-rep__decision{
+  color: rgba(241,247,244,.94);
+}
+
+html[data-theme="dark"] #modalReports .ln-rep__sub,
+html[data-theme="dark"] #modalReports .ln-kpi__label,
+html[data-theme="dark"] #modalReports .ln-rep__mini,
+html[data-theme="dark"] #modalReports .ln-rep__cat-amt,
+html[data-theme="dark"] #modalReports #reportsHint{
+  color: rgba(210,220,216,.70);
+}
+
+html[data-theme="dark"] #modalReports .ln-kpi,
+html[data-theme="dark"] #modalReports .ln-rep__cat,
+html[data-theme="dark"] #modalReports .ln-rep__insight{
+  background: rgba(20,30,36,.92);
+  border-color: rgba(255,255,255,.08);
+}
+
+html[data-theme="dark"] #modalReports .ln-rep__cat--empty{
+  color: rgba(210,220,216,.66);
+}
+
+html[data-theme="dark"] #modalReports .ln-rep__decision{
+  background: linear-gradient(180deg, rgba(39,64,112,.42), rgba(27,46,82,.34));
+  border-color: rgba(111,148,235,.20);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+html[data-theme="dark"] #modalReports .ln-rep__insight-dot{
+  background: rgba(123,164,255,.88);
+  box-shadow: 0 0 0 4px rgba(123,164,255,.10);
+}
+
+html[data-theme="dark"] #modalReports .ln-rep__insight-text{
+  color: rgba(223,232,228,.82);
+}
+
+html[data-theme="dark"] #modalReports .budget-bar__track{
+  background: rgba(255,255,255,.08);
+}
+
+html[data-theme="dark"] #modalReports .budget-bar__fill{
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 8px 18px rgba(47,111,85,.18);
+}
+
+@media (max-width: 980px){
+  #modalReports .ln-modal__panel{
+    width: calc(100vw - 24px);
+    max-height: calc(100vh - 24px);
+    margin: 12px auto 0;
+  }
+
+  .ln-rep__grid{ grid-template-columns: 1fr; }
+  .ln-rep__head--row,
+  .ln-rep__review-head{ flex-direction: column; align-items: stretch; }
+  .ln-rep__controls{ justify-content: flex-start; }
+  .ln-rep__decision{ max-width: none; }
+}
+
+@media (max-width: 720px){
+  .ln-rep__kpis,
+  .ln-rep__review-kpis{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px){
+  .ln-rep{ padding: 0 14px 14px; }
+  .ln-rep__card,
+  .ln-rep__review{ padding: 12px; }
+  .ln-rep__controls > *{ width: 100%; }
+  #reportsMonth{ min-width: 0; width: 100%; }
+  .ln-rep__kpis,
+  .ln-rep__review-kpis{ grid-template-columns: 1fr; }
+}

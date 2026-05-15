@@ -1,0 +1,145 @@
+
+.install-page {
+  min-height: 100vh;
+}
+
+.install-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.install-card {
+  width: min(720px, 100%);
+  background: rgba(255,255,255,0.65);
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 12px 34px rgba(0,0,0,0.12);
+  border-radius: 18px;
+  backdrop-filter: blur(16px);
+  padding: 22px;
+}
+
+.install-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.install-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(80,140,110,0.65), rgba(190,220,200,0.65));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);
+}
+
+.install-sub {
+  margin: 4px 0 0;
+  opacity: 0.75;
+}
+
+.install-alert {
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin: 12px 0;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.install-alert ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.install-alert--ok {
+  background: rgba(210, 245, 226, 0.7);
+}
+
+.install-alert--err {
+  background: rgba(255, 222, 222, 0.7);
+}
+
+.install-alert--warn {
+  background: rgba(255, 240, 200, 0.7);
+}
+
+.install-form {
+  margin-top: 10px;
+}
+
+.install-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.install-field {
+  display: grid;
+  gap: 6px;
+}
+
+.install-field--full {
+  grid-column: 1 / -1;
+}
+
+.install-field span {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.install-field input {
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.85);
+  outline: none;
+}
+
+.install-field input:focus {
+  border-color: rgba(80,140,110,0.55);
+  box-shadow: 0 0 0 3px rgba(80,140,110,0.18);
+}
+
+.install-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 14px;
+}
+
+.install-btn {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.75);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.install-btn--primary {
+  border-color: rgba(60,120,90,0.25);
+  background: rgba(90, 160, 120, 0.25);
+}
+
+.install-btn:hover {
+  filter: brightness(0.98);
+}
+
+.install-footnote {
+  margin-top: 12px;
+  font-size: 12.5px;
+  opacity: 0.72;
+}
+
+@media (max-width: 640px) {
+  .install-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,10 @@
+/* --- Focus session modal --- */
+.ln-modal__panel--focus{ width: min(520px, calc(100vw - 28px)); }
+.focus{ display: grid; gap: 14px; padding: 4px 0 2px; }
+.focus__grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.focus__timer{ font-size: 44px; font-weight: 900; text-align: center; letter-spacing: .5px; padding: 8px 0; }
+.focus__controls{ display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 560px){
+  .focus__grid{ grid-template-columns: 1fr; }
+}
