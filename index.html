@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LifeNest — Dashboard</title>
+  <link rel="stylesheet" href="assets/css/app.css" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <header class="topbar" role="banner">
+    <div class="topbar__inner">
+      <div class="brand">
+        <img class="brand__mark" src="assets/img/leaf.svg" alt="" aria-hidden="true" />
+        <div class="brand__name">LifeNest</div>
+        <div class="brand__divider" aria-hidden="true"></div>
+        <div class="brand__date" aria-label="Today"><span id="lnDate">—</span> <span class="brand__date--wide" id="lnDay">—</span></div>
+      </div>
+
+      <button class="menu-btn" type="button" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">
+        <span class="menu-btn__bar" aria-hidden="true"></span>
+        <span class="menu-btn__bar" aria-hidden="true"></span>
+        <span class="menu-btn__bar" aria-hidden="true"></span>
+      </button>
+
+      <div class="topbar__right">
+        <div class="search" role="search">
+          <svg class="icon icon--muted" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm11 3-6.2-6.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input class="search__input" id="taskSearch" type="search" placeholder="Search" aria-label="Search tasks" />
+        </div>
+
+        <button class="icon-btn" type="button" aria-label="Settings" data-open="budget">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm8.5-3.5a6.9 6.9 0 0 0-.1-1l2-1.5-2-3.4-2.4 1a8 8 0 0 0-1.7-1l-.3-2.6H10l-.3 2.6a8 8 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.5a6.9 6.9 0 0 0-.1 1c0 .3 0 .7.1 1l-2 1.5 2 3.4 2.4-1c.5.4 1.1.7 1.7 1l.3 2.6h4.2l.3-2.6c.6-.3 1.2-.6 1.7-1l2.4 1 2-3.4-2-1.5c.1-.3.1-.7.1-1Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="profile-wrap">
+          <button class="profile" id="profileBtn" type="button" aria-label="Profile" aria-haspopup="menu" aria-expanded="false">
+            <span class="avatar" id="profileAvatar" aria-hidden="true">A</span>
+            <span class="profile__name" id="profileName">User</span>
+            <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="profile-menu" id="profileMenu" role="menu" aria-label="Profile menu" aria-hidden="true">
+            <a class="profile-menu__item" role="menuitem" href="/account.php">Account</a>
+            <button class="profile-menu__item" role="menuitem" type="button" id="btnLogout">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<aside class="ln-drawer" id="drawer" aria-hidden="true" aria-label="Main menu">
+    <div class="ln-drawer__backdrop" data-close="drawer" aria-hidden="true"></div>
+    <div class="ln-drawer__panel" role="navigation" aria-label="Navigation">
+      <div class="ln-drawer__head">
+        <div class="ln-drawer__title">Menu</div>
+        <button class="ln-drawer__close" type="button" data-close="drawer" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+      <div class="ln-drawer__nav">
+        <button class="ln-drawer__item" type="button" data-nav="home">Dashboard</button>
+        <button class="ln-drawer__item" type="button" data-open="pending">Pending Actions</button>
+        <button class="ln-drawer__item" type="button" data-nav="tasks">Tasks</button>
+        <button class="ln-drawer__item" type="button" data-nav="study">Study</button>
+        <button class="ln-drawer__item" type="button" data-nav="budget">Budget</button>
+        <button class="ln-drawer__item" type="button" data-open="reports">Reports</button>
+        <button class="ln-drawer__item" type="button" data-open="expenses">All Expenses</button>
+        <button class="ln-drawer__item" type="button" data-open="focus">Focus Session</button>
+        <a class="ln-drawer__item ln-drawer__item--link" href="/account.php">Account</a>
+        <button class="ln-drawer__item ln-drawer__item--danger" type="button" id="drawerLogout">Logout</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="page" role="main">
+    <h2 class="section-title">Today Snapshot</h2>
+
+    <section class="snapshot snapshot--cards" aria-label="Today snapshot cards">
+      <article class="mini-card mini-card--warm">
+        <div class="mini-card__title">Tasks Today</div>
+        <div class="mini-card__value" id="snapTasksTodayCount">—</div>
+        <div class="mini-card__progress p0" id="snapTasksTodayProgress" aria-label="Tasks completed">
+          <div class="mini-card__track"></div>
+          <div class="mini-card__fill"></div>
+        </div>
+        <div class="mini-card__meta" id="snapTasksTodayMeta">—</div>
+      </article>
+
+      <article class="mini-card mini-card--warm">
+        <div class="mini-card__title">Overdue</div>
+        <div class="mini-card__value" id="snapOverdueCount">—</div>
+        <div class="mini-card__meta" id="snapOverdueMeta">—</div>
+      </article>
+
+      <article class="mini-card mini-card--cool mini-card--withpie">
+        <div class="mini-card__title">Study Time Today</div>
+        <div class="mini-card__value" id="snapStudyValue">—</div>
+        <div class="mini-card__meta" id="snapStudyMeta">Planned vs. Done</div>
+        <canvas class="mini-card__pie" id="studyPie" width="64" height="64" aria-label="Study planned versus done chart"></canvas>
+      </article>
+
+      <article class="mini-card mini-card--cool">
+        <div class="mini-card__title">Budget Remaining</div>
+        <div class="mini-card__value" id="snapBudgetRemaining">—</div>
+        <div class="mini-card__progress p0" id="snapBudgetProgress" aria-label="Budget remaining progress">
+          <div class="mini-card__track"></div>
+          <div class="mini-card__fill"></div>
+        </div>
+        <div class="mini-card__meta" id="snapBudgetMeta">This Month</div>
+      </article>
+
+      <article class="mini-card mini-card--cool">
+        <div class="mini-card__title">Spent Today</div>
+        <div class="mini-card__value" id="snapSpentToday">—</div>
+        <div class="mini-card__meta" id="snapSpentTodayMeta">—</div>
+      </article>
+
+      <article class="mini-card mini-card--mint">
+        <div class="mini-card__title">Weekly Progress</div>
+        <div class="mini-card__value" id="snapWeekly">—</div>
+        <div class="mini-card__meta" id="snapWeeklyMeta">—</div>
+        <canvas class="mini-card__spark" id="weeklySpark" width="120" height="54" aria-label="Weekly progress sparkline"></canvas>
+      </article>
+    </section>
+
+    <section class="snapshot snapshot--mobile" aria-label="Today snapshot mobile">
+      <article class="card card--plain">
+        <div class="card__header">
+          <h3 class="card__title">Today Snapshot</h3>
+          <div class="card__dots" aria-hidden="true"> </div>
+        </div>
+
+        <div class="mobile-snap">
+          <div class="mobile-snap__col">
+            <div class="mobile-snap__label">Tasks:</div>
+            <div class="mobile-snap__big" id="mSnapTasks">—</div>
+            <div class="mobile-snap__bar p0" id="mSnapTasksBar" aria-label="Tasks done">
+              <div class="mobile-snap__track"></div>
+              <div class="mobile-snap__fill"></div>
+            </div>
+            <div class="mobile-snap__hint" id="mSnapTasksHint">—</div>
+          </div>
+
+          <div class="mobile-snap__divider" aria-hidden="true"></div>
+
+          <div class="mobile-snap__col">
+            <div class="mobile-snap__label">Study:</div>
+            <div class="mobile-snap__big" id="mSnapStudy">—</div>
+            <div class="mobile-snap__bar p0" id="mSnapStudyBar" aria-label="Study on track">
+              <div class="mobile-snap__track"></div>
+              <div class="mobile-snap__fill"></div>
+            </div>
+            <div class="mobile-snap__hint" id="mSnapStudyHint">—</div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card card--today-plan">
+        <div class="card__header">
+          <h3 class="card__title">Today Plan</h3>
+          <button class="dots-btn" type="button" aria-label="More options">···</button>
+        </div>
+
+        <div class="today-plan">
+          <div class="today-plan__col">
+            <div class="subhead">Top 3 Priorities</div>
+
+            <div class="prio-list" id="prioList" aria-label="Top priorities"></div>
+
+            <div class="subhead subhead--mt">Time Blocks</div>
+            <div class="time-blocks" id="timeBlocks" aria-label="Time blocks"></div>
+
+            <div class="today-plan__actions today-plan__actions--desktop">
+              <button class="btn btn--ghost btn--full" type="button" id="btnReplan" data-action="replan">Replan</button>
+              <button class="btn btn--primary btn--full" type="button" data-open="focus">
+                <span class="btn__icon" aria-hidden="true">▶</span>
+                Start Focus Session
+              </button>
+            </div>
+
+            <div class="today-plan__actions today-plan__actions--mobile">
+              <button class="btn btn--primary btn--full" type="button" data-open="focus">
+                <span class="btn__icon" aria-hidden="true">▶</span>
+                Start Focus Session
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card card--tasks">
+        <div class="card__header">
+          <h3 class="card__title">Tasks Panel</h3>
+          <button class="dots-btn" type="button" aria-label="More options" data-menu="tasks">···</button>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Tasks tabs">
+          <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="today">Today</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="overdue">Overdue</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="upcoming">Upcoming</button>
+        </div>
+
+        <div class="filters">
+          <div class="filters__label">Quick Filter:</div>
+
+          <div class="filters__controls" aria-label="Quick filter controls">
+            <div class="select-wrap select-wrap--chip" aria-label="Type">
+              <select class="select select--native select--chip" id="filterKind" aria-label="Type">
+                <option value="" selected>Type</option>
+                <option value="personal">Personal</option>
+                <option value="study">Study</option>
+              </select>
+              <svg class="select-wrap__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div class="select-wrap select-wrap--chip" aria-label="Priority">
+              <select class="select select--native select--chip" id="filterPriority" aria-label="Priority">
+                <option value="" selected>Priority</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+              <svg class="select-wrap__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div class="select-wrap select-wrap--chip" aria-label="Status">
+              <select class="select select--native select--chip" id="filterStatus" aria-label="Status">
+                <option value="" selected>Status</option>
+                <option value="todo">Todo</option>
+                <option value="done">Done</option>
+              </select>
+              <svg class="select-wrap__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <button class="link link--muted" type="button" id="filtersClear" hidden>Clear</button>
+          </div>
+        </div>
+
+        <div class="task-list" id="tasksList" data-panel="today" aria-label="Tasks list"></div>
+      </article>
+
+      <div class="side-stack">
+        <article class="card card--study">
+          <div class="card__header">
+            <h3 class="card__title">Study Panel</h3>
+            <button class="dots-btn" type="button" aria-label="More options" data-menu="study">···</button>
+          </div>
+
+          <div class="study-grid" id="studyGrid" aria-label="Study items"></div>
+
+          <button class="btn btn--ghost btn--full" id="btnAddStudy" type="button">Add Study Task</button>
+        </article>
+
+        <article class="card card--budget">
+          <div class="card__header">
+            <h3 class="card__title">Budget Panel</h3>
+            <button class="dots-btn" type="button" aria-label="More options" data-menu="budget">···</button>
+          </div>
+
+          <div class="budget-head">
+            <div class="budget-head__title">Spent vs Budget</div>
+            <div class="budget-head__amount" id="budgetHeadAmount">—</div>
+          </div>
+
+          <div class="budget-bar p0" id="budgetBar" aria-label="Spent vs budget progress">
+            <div class="budget-bar__track"></div>
+            <div class="budget-bar__fill"></div>
+          </div>
+
+          <div class="budget-sub" id="budgetSub">—</div>
+
+          <div class="budget-form">
+            <div class="budget-form__title">Quick Add Expense</div>
+            <div class="budget-form__row">
+              <input class="input" id="expAmount" inputmode="decimal" type="text" placeholder="Amount" aria-label="Amount" />
+
+              <div class="select-wrap" aria-label="Category">
+                <input class="input input--selectlike" id="expCategory" list="expenseCats" type="text" placeholder="Category" aria-label="Category" />
+                <svg class="select-wrap__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+
+              <div class="date-wrap" aria-label="Date">
+                <input class="input input--date" id="expDate" type="date" aria-label="Expense date" />
+                <svg class="date-wrap__ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 2v3m10-3v3M4 8h16M6 6h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+              </div>
+
+            </div>
+            <div class="budget-form__hint" id="expHint" aria-live="polite"></div>
+          </div>
+
+          <div class="budget-last">
+            <div class="budget-last__title">Last 5 Expenses</div>
+            <div class="budget-last__row">
+              <div class="budget-last__left">Last 5: Spent</div>
+              <div class="budget-last__right" id="last5Total">—</div>
+            </div>
+          </div>
+
+          <div class="alert is-hidden" id="budgetAlert" role="status">
+            <span class="alert__icon" aria-hidden="true">
+              <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 9v4m0 4h.01M10.3 4.6c.8-1.4 2.6-1.4 3.4 0l8.1 14.1c.8 1.4-.2 3.2-1.7 3.2H3.9c-1.6 0-2.6-1.8-1.7-3.2L10.3 4.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span id="budgetAlertText">Budget Limit Approaching</span>
+          </div>
+
+          <div class="budget-mobile">
+            <div class="budget-mobile__title">Budget Panel</div>
+            <div class="budget-mobile__remaining" id="budgetMobileRemaining">Remaining: <strong>—</strong></div>
+            <button class="btn btn--primary btn--full" type="button" data-open="expense">Add Expense</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer" role="contentinfo">
+      <div class="footer__text">Last synced: <span id="lastSynced">—</span>.&nbsp;&nbsp; Secure Connection.&nbsp;&nbsp; Version 2.1.</div>
+    </footer>
+  </main>
+
+    <div class="fab-wrap" aria-label="Quick actions">
+    <div class="speed-dial" id="quickDial" role="menu" aria-label="Actions menu" aria-hidden="true">
+      <div class="speed-dial__grid">
+        <button class="speed-item" type="button" role="menuitem" data-open="task">
+          <span class="speed-item__icon" aria-hidden="true">
+            <svg class="speed-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </span>
+          <span class="speed-item__label">Add Task</span>
+        </button>
+        <button class="speed-item" type="button" role="menuitem" data-open="expense">
+          <span class="speed-item__icon" aria-hidden="true">
+            <svg class="speed-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M16 6.5c0-1.4-1.8-2.5-4-2.5s-4 1.1-4 2.5 1.8 2.5 4 2.5 4 1.1 4 2.5S14.2 16 12 16s-4-1.1-4-2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="speed-item__label">Add Expense</span>
+        </button>
+        <button class="speed-item" type="button" role="menuitem" data-open="note">
+          <span class="speed-item__icon" aria-hidden="true">
+            <svg class="speed-ic" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 20h9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          </span>
+          <span class="speed-item__label">Add Note</span>
+        </button>
+
+        <button class="speed-item" type="button" role="menuitem" data-open="budget">
+          <span class="speed-item__icon" aria-hidden="true">
+            <svg class="speed-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-12v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="speed-item__label">Set Monthly Budget</span>
+        </button>
+        <button class="speed-item" type="button" role="menuitem" data-open="fixed">
+          <span class="speed-item__icon" aria-hidden="true">
+            <svg class="speed-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3m10-3v3M4 8h16M6 6h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M8 12h8M8 16h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="speed-item__label">Import Fixed Events</span>
+        </button>
+        <button class="speed-item" type="button" role="menuitem" data-open="reports">
+          <span class="speed-item__icon" aria-hidden="true">
+            <svg class="speed-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10l4 4v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M17 3v6h6" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M9 13h6M9 17h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="speed-item__label">Open Reports</span>
+        </button>
+      </div>
+
+      <div class="speed-dial__reports">
+        <button class="speed-report" type="button" data-report="weekly">Weekly Report</button>
+        <button class="speed-report" type="button" data-report="monthly">Monthly Report</button>
+      </div>
+    </div>
+
+    <button class="fab" type="button" aria-label="Open quick actions" aria-controls="quickDial" aria-expanded="false">
+      <span class="fab__icon fab__icon--plus" aria-hidden="true">+</span>
+      <span class="fab__icon fab__icon--min" aria-hidden="true">–</span>
+    </button>
+  </div>
+
+
+  <nav class="bottom-nav" aria-label="Bottom navigation">
+    <a class="bottom-nav__item is-active" href="#" aria-label="Home" data-nav="home">
+      <svg class="nav-ic" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10.5Z" fill="currentColor"/>
+      </svg>
+      <span>Home</span>
+    </a>
+
+    <a class="bottom-nav__item" href="#" aria-label="Tasks" data-nav="tasks">
+      <svg class="nav-ic" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 4h14v2H7V4Zm0 7h14v2H7v-2Zm0 7h14v2H7v-2ZM3 5.5l1.2 1.2L6.4 4.5l1.1 1.1L4.2 9 2 6.8 3 5.5Zm0 7 1.2 1.2L6.4 11.5l1.1 1.1L4.2 16 2 13.8 3 12.5Zm0 7 1.2 1.2L6.4 18.5l1.1 1.1L4.2 23 2 20.8 3 19.5Z" fill="currentColor"/>
+      </svg>
+      <span>Tasks</span>
+    </a>
+
+    <a class="bottom-nav__item bottom-nav__item--ghost" href="#" aria-label="Add" data-action="quick">
+      <span class="nav-fab" aria-hidden="true">+</span>
+    </a>
+
+    <a class="bottom-nav__item" href="#" aria-label="Study" data-nav="study">
+      <svg class="nav-ic" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 5.5 12 2l8 3.5v12L12 21l-8-3.5v-12Zm8 1.9L6 6v9.6l6 2.6 6-2.6V6l-6 1.4Z" fill="currentColor"/>
+      </svg>
+      <span>Study</span>
+    </a>
+
+    <a class="bottom-nav__item" href="#" aria-label="Budget" data-nav="budget">
+      <svg class="nav-ic" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2C7.6 2 4 5.6 4 10s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8Zm1 13.5V17h-2v-1.5c-1.2-.2-2.2-1-2.4-2.2l2-.4c.1.6.6 1.1 1.4 1.1.8 0 1.3-.4 1.3-1 0-.7-.7-.9-1.8-1.2-1.6-.4-2.9-1-2.9-2.7 0-1.3 1-2.3 2.4-2.6V3h2v1.5c1 .2 1.9.9 2.2 2l-2 .5c-.1-.5-.5-.9-1.2-.9-.7 0-1.2.3-1.2.9 0 .6.6.8 1.8 1.1 1.8.4 2.9 1.2 2.9 2.8 0 1.4-1 2.4-2.3 2.6Z" fill="currentColor"/>
+      </svg>
+      <span>Budget</span>
+    </a>
+
+    <a class="bottom-nav__item bottom-nav__item--more" href="#" aria-label="More" data-action="drawer">
+      <svg class="nav-ic" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm7 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm7 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" fill="currentColor"/>
+      </svg>
+      <span>More</span>
+    </a>
+  <div class="ln-bulkbar" id="taskBulkBar" aria-hidden="true" aria-label="Bulk task actions">
+    <div class="ln-bulkbar__left">
+      <strong id="taskBulkCount">0</strong> selected
+    </div>
+    <div class="ln-bulkbar__actions">
+      <button class="btn btn--ghost btn--sm" type="button" id="taskBulkDone">Mark Done</button>
+      <button class="btn btn--ghost btn--sm" type="button" id="taskBulkTodo">Mark Todo</button>
+      <button class="btn btn--ghost btn--sm" type="button" id="taskBulkPriority">Priority</button>
+      <button class="btn btn--danger btn--sm" type="button" id="taskBulkDelete">Delete</button>
+      <button class="btn btn--ghost btn--sm" type="button" id="taskBulkClear">Clear</button>
+    </div>
+  </div>
+
+  <div class="ln-snack" id="lnSnack" aria-hidden="true" role="status" aria-live="polite">
+    <div class="ln-snack__msg" id="lnSnackMsg">—</div>
+    <div class="ln-snack__actions">
+      <button class="btn btn--ghost btn--sm" type="button" id="lnSnackPending">Pending</button>
+      <button class="btn btn--ghost btn--sm" type="button" id="lnSnackAction">Undo</button>
+      <button class="ln-snack__close" type="button" id="lnSnackClose" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>
+  </div>
+
+  </nav>
+<datalist id="expenseCats"></datalist>
+<div class="ctx-backdrop" id="ctxBackdrop" aria-hidden="true"></div>
+  <div class="ctx-menu" id="ctxMenu" role="menu" aria-hidden="true" aria-label="Context menu"></div>
+
+  <section class="ln-modal" id="modalPending" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalPendingTitle">
+    <div class="ln-modal__backdrop" data-close="modal"></div>
+    <div class="ln-modal__panel ln-modal__panel--wide">
+      <div class="ln-modal__head">
+        <h3 class="ln-modal__title" id="modalPendingTitle">Pending Actions</h3>
+        <button class="ln-modal__close" type="button" data-close="modal" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+      <div class="ln-pending">
+        <div class="ln-pending__hint" id="pendingHint" aria-live="polite"></div>
+        <div class="ln-pending__list" id="pendingList" aria-label="Pending actions list"></div>
+      </div>
+    </div>
+  </section>
+<section class="ln-modal" id="modalTask" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTaskTitle">
+    <div class="ln-modal__backdrop" data-close="modal"></div>
+    <div class="ln-modal__panel">
+      <div class="ln-modal__head">
+        <h3 class="ln-modal__title" id="modalTaskTitle">Add Task</h3>
+        <button class="ln-modal__close" type="button" data-close="modal" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+      <form class="ln-form" id="taskForm">
+        <input type="hidden" id="taskId" value="" />
+        <div class="ln-form__row">
+          <label class="ln-label" for="taskTitle">Title</label>
+          <input class="input" id="taskTitle" name="title" type="text" maxlength="255" required />
+        </div>
+        <div class="ln-form__grid">
+          <div class="ln-form__row">
+            <label class="ln-label" for="taskKind">Type</label>
+            <div class="select-wrap">
+              <select class="select select--native" id="taskKind" name="kind">
+                <option value="personal">Personal</option>
+                <option value="study">Study</option>
+              </select>
+              <svg class="select-wrap__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="ln-form__row">
+            <label class="ln-label" for="taskPriority">Priority</label>
+            <div class="select-wrap">
+              <select class="select select--native" id="taskPriority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+              <svg class="select-wrap__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="ln-form__grid">
+          <div class="ln-form__row">
+            <label class="ln-label" for="taskDue">Due date</label>
+            <input class="input input--date" id="taskDue" name="due_date" type="date" />
+          </div>
+          <div class="ln-form__row">
+            <label class="ln-label" for="taskDur">Duration (min)</label>
+            <input class="input" id="taskDur" name="duration_minutes" type="number" min="1" max="1440" placeholder="e.g. 90" />
+          </div>
+        </div>
+
+        <div class="ln-form__actions">
+          <button class="btn btn--ghost" type="button" data-close="modal">Cancel</button>
+          <button class="btn btn--danger" type="button" id="taskDeleteBtn" hidden>Delete</button>
+          <button class="btn btn--primary" type="submit">Save</button>
+        </div>
+        <div class="ln-form__hint" id="taskFormHint" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="ln-modal" id="modalExpense" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalExpenseTitle">
+    <div class="ln-modal__backdrop" data-close="modal"></div>
+    <div class="ln-modal__panel">
+      <div class="ln-modal__head">
+        <h3 class="ln-modal__title" id="modalExpenseTitle">Add Expense</h3>
+        <button class="ln-modal__close" type="button" data-close="modal" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+      <form class="ln-form" id="expenseForm">
+        <input type="hidden" id="expenseId" value="" />
+        <div class="ln-form__grid">
+          <div class="ln-form__row">
+            <label class="ln-label" for="expAmount2">Amount</label>
+            <input class="input" id="expAmount2" inputmode="decimal" type="text" required />
+          </div>
+          <div class="ln-form__row">
+            <label class="ln-label" for="expCurrency2">Currency</label>
+            <div class="select-wrap">
+              <select class="select select--native" id="expCurrency2">
+                <option value="USD">USD</option>
+                <option value="TRY">TRY</option>
+                <option value="EUR">EUR</option>
+                <option value="SAR">SAR</option>
+              </select>
+              <svg class="select-wrap__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="ln-form__grid">
+          <div class="ln-form__row">
+            <label class="ln-label" for="expCategory2">Category</label>
+            <div class="select-wrap">
+              <input class="input input--selectlike" id="expCategory2" list="expenseCats" type="text" placeholder="Category" aria-label="Category" />
+              <svg class="select-wrap__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="ln-form__row">
+            <label class="ln-label" for="expDate2">Date</label>
+            <input class="input input--date" id="expDate2" type="date" required />
+          </div>
+        </div>
+        <div class="ln-form__row">
+          <label class="ln-label" for="expNote2">Note (optional)</label>
+          <input class="input" id="expNote2" type="text" maxlength="255" placeholder="e.g. Coffee & snack" />
+        </div>
+
+        <div class="ln-form__actions">
+          <button class="btn btn--ghost" type="button" data-close="modal">Cancel</button>
+          <button class="btn btn--danger" type="button" id="expenseDeleteBtn" hidden>Delete</button>
+          <button class="btn btn--primary" type="submit">Save</button>
+        </div>
+        <div class="ln-form__hint" id="expenseFormHint" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="ln-modal" id="modalStudy" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalStudyTitle">
+    <div class="ln-modal__backdrop" data-close="modal"></div>
+    <div class="ln-modal__panel">
+      <div class="ln-modal__head">
+        <h3 class="ln-modal__title" id="modalStudyTitle">Add Study Task</h3>
+        <button class="ln-modal__close" type="button" data-close="modal" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+      <form class="ln-form" id="studyForm">
+        <input type="hidden" id="studyId" value="" />
+        <div class="ln-form__row">
+          <label class="ln-label" for="studyTitle">Title</label>
+          <input class="input" id="studyTitle" type="text" maxlength="255" required />
+        </div>
+        <div class="ln-form__grid">
+          <div class="ln-form__row">
+            <label class="ln-label" for="studyPlanned">Planned (min)</label>
+            <input class="input" id="studyPlanned" type="number" min="0" max="100000" value="60" />
+          </div>
+          <div class="ln-form__row">
+            <label class="ln-label" for="studyDone">Done (min)</label>
+            <input class="input" id="studyDone" type="number" min="0" max="100000" value="0" />
+          </div>
+        </div>
+        <div class="ln-form__row">
+          <label class="ln-label" for="studyDue">Next due date</label>
+          <input class="input input--date" id="studyDue" type="date" />
+        </div>
+
+        <div class="ln-form__actions">
+          <button class="btn btn--ghost" type="button" data-close="modal">Cancel</button>
+          <button class="btn btn--danger" type="button" id="studyDeleteBtn" hidden>Delete</button>
+          <button class="btn btn--primary" type="submit">Save</button>
+        </div>
+        <div class="ln-form__hint" id="studyFormHint" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="ln-modal" id="modalBudget" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalBudgetTitle">
+    <div class="ln-modal__backdrop" data-close="modal"></div>
+    <div class="ln-modal__panel">
+      <div class="ln-modal__head">
+        <h3 class="ln-modal__title" id="modalBudgetTitle">Set Monthly Budget</h3>
+        <button class="ln-modal__close" type="button" data-close="modal" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+      <form class="ln-form" id="budgetForm">
+        <div class="ln-form__grid">
+          <div class="ln-form__row">
+            <label class="ln-label" for="budgetMonth">Month</label>
+            <input class="input" id="budgetMonth" type="month" required />
+          </div>
+          <div class="ln-form__row">
+            <label class="ln-label" for="budgetCurrency">Currency</label>
+            <div class="select-wrap">
+              <select class="select select--native" id="budgetCurrency">
+                <option value="USD">USD</option>
+                <option value="TRY">TRY</option>
+                <option value="EUR">EUR</option>
+                <option value="SAR">SAR</option>
+              </select>
+              <svg class="select-wrap__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="ln-form__row">
+          <label class="ln-label" for="budgetAmount">Budget amount</label>
+          <input class="input" id="budgetAmount" inputmode="decimal" type="text" placeholder="e.g. 1150" required />
+        </div>
+
+        <div class="ln-form__actions">
+          <button class="btn btn--ghost" type="button" data-close="modal">Cancel</button>
+          <button class="btn btn--primary" type="submit">Save</button>
+        </div>
+        <div class="ln-form__hint" id="budgetFormHint" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="ln-modal" id="modalNote" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalNoteTitle">
+    <div class="ln-modal__backdrop" data-close="modal"></div>
+    <div class="ln-modal__panel">
+      <div class="ln-modal__head">
+        <h3 class="ln-modal__title" id="modalNoteTitle">Task Notes</h3>
+        <button class="ln-modal__close" type="button" data-close="modal" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+
+      <div class="ln-note" aria-label="Notes">
+        <div class="ln-note__task" id="noteTaskTitle">—</div>
+        <div class="ln-note__list" id="notesList" aria-live="polite"></div>
+
+        <form class="ln-note__form" id="noteForm">
+          <label class="ln-label" for="noteBody">Add a note</label>
+          <textarea class="input input--ta" id="noteBody" rows="4" maxlength="5000" required></textarea>
+          <div class="ln-form__actions">
+            <button class="btn btn--ghost" type="button" data-close="modal">Close</button>
+            <button class="btn btn--ghost" type="button" id="noteCancelEdit" hidden>Cancel Edit</button>
+            <button class="btn btn--primary" id="noteSaveBtn" type="submit">Save Note</button>
+          </div>
+          <div class="ln-form__hint" id="noteFormHint" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="ln-modal" id="modalExpenses" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalExpensesTitle">
+    <div class="ln-modal__backdrop" data-close="modal"></div>
+    <div class="ln-modal__panel">
+      <div class="ln-modal__head">
+        <h3 class="ln-modal__title" id="modalExpensesTitle">Expenses</h3>
+        <button class="ln-modal__close" type="button" data-close="modal" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+
+      <div class="ln-exp" aria-label="Expenses list">
+        <div class="ln-exp__filters">
+          <div class="ln-exp__field">
+            <label class="ln-label" for="expensesMonth">Month</label>
+            <input class="input" id="expensesMonth" type="month" />
+          </div>
+
+          <button class="btn btn--ghost" type="button" id="btnReloadExpenses">Reload</button>
+          <button class="btn btn--primary" type="button" id="btnAddExpenseFromList">Add Expense</button>
+        </div>
+
+        <div class="ln-exp__summary" id="expensesSummary">—</div>
+        <div class="ln-exp__list" id="expensesList" aria-live="polite"></div>
+        <div class="ln-form__hint" id="expensesHint" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ln-modal" id="modalReports" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalReportsTitle">
+    <div class="ln-modal__backdrop" data-close="modal"></div>
+    <div class="ln-modal__panel">
+      <div class="ln-modal__head">
+        <h3 class="ln-modal__title" id="modalReportsTitle">Reports</h3>
+        <button class="ln-modal__close" type="button" data-close="modal" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+
+      <div class="ln-rep" aria-label="Reports">
+        <div class="ln-rep__grid">
+          <div class="ln-rep__card">
+            <div class="ln-rep__head">
+              <div class="ln-rep__title">This Week</div>
+              <div class="ln-rep__sub" id="repWeekRange">—</div>
+            </div>
+
+            <div class="ln-rep__kpis">
+              <div class="ln-kpi">
+                <div class="ln-kpi__label">Done</div>
+                <div class="ln-kpi__value" id="repWeekDone">—</div>
+              </div>
+              <div class="ln-kpi">
+                <div class="ln-kpi__label">Total</div>
+                <div class="ln-kpi__value" id="repWeekTotal">—</div>
+              </div>
+              <div class="ln-kpi">
+                <div class="ln-kpi__label">Completion</div>
+                <div class="ln-kpi__value" id="repWeekPct">—</div>
+              </div>
+            </div>
+
+            <div class="budget-bar p0 rep-bar" id="repWeekBar" aria-label="Weekly completion progress">
+              <div class="budget-bar__track"></div>
+              <div class="budget-bar__fill"></div>
+            </div>
+
+            <div class="ln-rep__mini" id="repWeekSpend">—</div>
+            <div class="ln-rep__cats" id="repWeekCats" aria-live="polite"></div>
+          </div>
+
+          <div class="ln-rep__card">
+            <div class="ln-rep__head ln-rep__head--row">
+              <div>
+                <div class="ln-rep__title">This Month</div>
+                <div class="ln-rep__sub" id="repMonthRange">—</div>
+              </div>
+
+              <div class="ln-rep__controls">
+                <label class="ln-label" for="reportsMonth">Month</label>
+                <input class="input input--sm" id="reportsMonth" type="month" />
+                <button class="btn btn--ghost btn--sm" type="button" id="btnReloadReports">Reload</button>
+              </div>
+            </div>
+
+            <div class="ln-rep__kpis">
+              <div class="ln-kpi">
+                <div class="ln-kpi__label">Budget</div>
+                <div class="ln-kpi__value" id="repMonthBudget">—</div>
+              </div>
+              <div class="ln-kpi">
+                <div class="ln-kpi__label">Spent</div>
+                <div class="ln-kpi__value" id="repMonthSpent">—</div>
+              </div>
+              <div class="ln-kpi">
+                <div class="ln-kpi__label">Remaining</div>
+                <div class="ln-kpi__value" id="repMonthRemaining">—</div>
+              </div>
+            </div>
+
+            <div class="budget-bar p0 rep-bar" id="repMonthBar" aria-label="Monthly spent vs budget progress">
+              <div class="budget-bar__track"></div>
+              <div class="budget-bar__fill"></div>
+            </div>
+
+            <div class="ln-rep__cats" id="repMonthCats" aria-live="polite"></div>
+            <div class="ln-form__hint" id="reportsHint" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ln-modal" id="modalFocus" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalFocusTitle">
+    <div class="ln-modal__backdrop" data-close="modal"></div>
+    <div class="ln-modal__panel ln-modal__panel--focus">
+      <div class="ln-modal__head">
+        <h3 class="ln-modal__title" id="modalFocusTitle">Focus Session</h3>
+        <button class="ln-modal__close" type="button" data-close="modal" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+
+      <div class="focus" aria-label="Focus session">
+        <div class="focus__grid">
+          <div class="ln-form__row">
+            <label class="ln-label" for="focusMinutes">Duration (min)</label>
+            <input class="input" id="focusMinutes" type="number" min="5" max="240" value="25" />
+          </div>
+          <div class="ln-form__row">
+            <label class="ln-label" for="focusStudyId">Log to study (optional)</label>
+            <div class="select-wrap">
+              <select class="select select--native" id="focusStudyId">
+                <option value="">— None —</option>
+              </select>
+              <svg class="select-wrap__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="focus__timer" id="focusTimer" aria-live="polite">25:00</div>
+
+        <div class="focus__controls">
+          <button class="btn btn--primary" type="button" id="focusStart">Start</button>
+          <button class="btn btn--ghost" type="button" id="focusPause" hidden>Pause</button>
+          <button class="btn btn--ghost" type="button" id="focusResume" hidden>Resume</button>
+          <button class="btn btn--danger" type="button" id="focusStop" disabled>Stop</button>
+        </div>
+
+        <div class="ln-form__hint" id="focusHint" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="ln-modal" id="modalFixed" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalFixedTitle">
+    <div class="ln-modal__backdrop" data-close="modal"></div>
+    <div class="ln-modal__panel">
+      <div class="ln-modal__head">
+        <h3 class="ln-modal__title" id="modalFixedTitle">Fixed Events</h3>
+        <button class="ln-modal__close" type="button" data-close="modal" aria-label="Close"><svg class="icon icon--xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+
+      <div class="ln-exp">
+        <div class="ln-exp__summary">Manage your daily time blocks (used in “Today Plan”).</div>
+
+        <div class="ln-fixed__list" id="fixedList" aria-label="Fixed events list"></div>
+
+        <form class="ln-form ln-fixed__form" id="fixedForm">
+          <input type="hidden" id="fixedId" value="" />
+          <div class="ln-form__grid">
+            <div class="ln-form__row">
+              <label class="ln-label" for="fixedName">Name</label>
+              <input class="input" id="fixedName" type="text" maxlength="40" required />
+            </div>
+            <div class="ln-form__row">
+              <label class="ln-label" for="fixedType">Label</label>
+              <div class="select-wrap">
+                <select class="select select--native" id="fixedType">
+                  <option value="focus">Focus</option>
+                  <option value="admin">Admin</option>
+                  <option value="low">Low</option>
+                </select>
+                <svg class="select-wrap__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="ln-form__grid">
+            <div class="ln-form__row">
+              <label class="ln-label" for="fixedStart">Start</label>
+              <input class="input" id="fixedStart" type="time" required />
+            </div>
+            <div class="ln-form__row">
+              <label class="ln-label" for="fixedEnd">End</label>
+              <input class="input" id="fixedEnd" type="time" required />
+            </div>
+          </div>
+
+          <div class="ln-form__actions">
+            <button class="btn btn--ghost" type="button" id="fixedCancel">Cancel</button>
+            <button class="btn btn--danger" type="button" id="fixedDelete" hidden>Delete</button>
+            <button class="btn btn--primary" type="submit">Save</button>
+          </div>
+          <div class="ln-form__hint" id="fixedHint" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script src="assets/js/lib/charts.js"></script>
+  <script src="assets/js/core/app.js"></script>
+  <script src="assets/js/pages/dashboard.js"></script>
+</body>
+</html>
